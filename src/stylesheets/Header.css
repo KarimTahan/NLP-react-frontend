@@ -1,0 +1,17 @@
+.header {
+    position:relative;
+    text-align: center;
+    color:white;
+    font-size: 30px;
+    background-image: url('.././img/spaceBackground.jpeg');
+    width:99%;
+    padding: 15px;;
+    border-radius: 25px;
+    height:900px;
+    background-color:rgba(50, 6, 65, 0.4);
+    top: 0;
+	bottom:500px;
+	left: 0;
+	right: 0;
+    margin: auto;
+}

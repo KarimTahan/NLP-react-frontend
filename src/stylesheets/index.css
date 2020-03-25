@@ -1,0 +1,36 @@
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-repeat: no-repeat;
+    background-color:white;
+    background-size: cover;
+    align-content: center;
+    color:white;
+}
+.middle{
+    position:absolute;
+    width:99%;
+    padding: 50px;
+    border-radius: 25px;
+    background-color: rgba(121, 94, 136, 0);
+    height:800px;
+    top:200px;
+	bottom:100px;
+	left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.bottom{
+    width:99%;
+    height:200px;
+    border-top: 1px black;
+    padding: 50px;
+    border-radius: 25px;
+    background-color: white;
+    top:0;
+	
+	left: 0;
+    right: 0;
+    margin: auto;
+}

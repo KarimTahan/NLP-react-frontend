@@ -1,17 +1,31 @@
+//React Libraries
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+//Components
+import Header from './scripts/Header';
+import Form from './scripts/Form';
+//Index stylee sheet
+import './stylesheets/index.css';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+//NOTE: Nav bar is within header
+//main app function rendering to web page
+function App() {
+  return (
+    <div className="App">
+        <div className="top">
+            <Header/> 
+            <br/>
+            <div className="middle">
+                <Form/>
+            </div>
+        </div>
+        <br/>
+        <div className="bottom">
+    
+        </div>
+    </div>
+  );
+};
+//Render to root from index.html
+ReactDOM.render(<App/>,document.querySelector('#root'));
+export default App;//exporting  App;

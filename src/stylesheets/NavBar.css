@@ -1,0 +1,32 @@
+.NavBar{
+    background-color:lightgrey;
+    width:99%;
+    padding: 4px;
+    border-radius: 25px;
+    
+
+}
+.topnav {
+    position: relative;
+    overflow: hidden;
+    background-color:rgba(255,255, 255, 0);
+}
+
+.topnav a {
+    float: left ;
+    color: black;
+    text-align: center;
+    padding: 12px 35px;
+    text-decoration: none;
+    border-radius: 25px;
+    font-size: 17px;
+}
+
+.topnav a:hover {
+    background-color: rgb(53, 4, 69);
+    color: black;
+}
+
+.topnav a.active {
+    color: navy;
+}
