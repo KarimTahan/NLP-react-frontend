@@ -1,12 +1,15 @@
 import React from 'react';
 import NavBar from './NavBar';
 import '.././stylesheets/Header.css';
+import '.././stylesheets/index.css';
+import Title from './Title';
 
 const Header = () => {
     return ( 
         <div class="header">
             <NavBar/>
-            <h1>Novel Generator</h1>
+            <Title/>
+            <br/>
         </div>
     );
 }

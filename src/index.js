@@ -2,8 +2,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 //Components
-import Header from './scripts/Header';
-import Form from './scripts/Form';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import Content from './components/Content';
+
 //Index stylee sheet
 import './stylesheets/index.css';
 
@@ -14,18 +16,18 @@ function App() {
     <div className="App">
         <div className="top">
             <Header/> 
-            <br/>
-            <div className="middle">
-                <Form/>
-            </div>
         </div>
         <br/>
-        <div className="bottom">
-    
+        <div className="middle">
+            <Content/>
+        </div>
+      
+        <div className="Footer">
+              <Footer/>
         </div>
     </div>
   );
 };
 //Render to root from index.html
-ReactDOM.render(<App/>,document.querySelector('#root'));
+ReactDOM.render(<App/>,document.getElementById('root'));
 export default App;//exporting  App;

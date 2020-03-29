@@ -8,7 +8,7 @@ const NavBar = () => {
         //nav bar JSX
         <div className="NavBar">
               <div class="topnav">
-                <a class="active" href="index.html"><b>Home</b></a>
+                <a class="active" href="index.js"><b>Home</b></a>
                 <a href="About.html"><b>About</b></a>
                 <a href="OurAuthors.html"><b>Our Authors</b></a>
             </div>

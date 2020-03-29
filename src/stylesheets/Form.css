@@ -1,53 +1,96 @@
 .form {
-	width: 800px;
-    height: 400px;
+	width: 100%;
+    height: 600px;
     align-content: center;
-	background-color:rgba(211, 211, 211,0.8);
+	background-color: white;
     position: relative;
     border-color: 1px darkgrey;
     border-radius: 25px;
-    top:100px;
 	bottom:0px;
     padding: 40px;
 	left: 0;
     color:black;
     margin: auto;
+    font-size: large;
+    font-family: Arial, Helvetica, sans-serif;
+    
     
 }
+.form-div{
+    height:200px;
+}
+#next{
+    
+    float:right;  
+    height: 30px;
+    width: 100px;
+    background-color: rgb(12, 60, 191);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+#next:hover {
+    background-color: rgb(209, 184, 226);
+}
 
-* {box-sizing: border-box;}
+#previous{
+    float:left;
+    height: 30px;
+    width: 100px;
+    background-color: rgb(62, 62, 63);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+#previous:hover {
+    background-color: rgb(209, 184, 226);
+}
+
+
 #author{
-    width: 95%;
+    font-size: 14pt;
+    width: 100%;
     padding: 12px;
     color:black;
     border: 1px solid darkgray;
     border-radius: 4px;
-    height: 30px;
+    height: 50px;
     margin-top: 6px;
     margin-bottom: 16px;
     resize: vertical;
 
 }
-#length{
-    width: 95%;
+#seed{
+    width: 100%;
     padding: 12px;
     color:black;
     border: 1px solid darkgrey;
     border-radius: 4px;
-    height: 30px;
+    height: 50px;
     margin-top: 6px;
     margin-bottom: 16px;
     resize: vertical;
+    font-size: 14pt;
 }
-
+.titles{
+    background-color: white;
+    border: 21x solid rgb(20, 12, 131);
+    border-radius: 15px;
+    text-align:center;
+    width:150px;
+    height:55px;
+}
 input[type=text], textarea {
+    font-size:10pt;
     width: 95%;
     padding: 12px;
     border: 1px solid darkgray;
     border-radius: 4px;
     height: 50px;
     margin-top: 6px;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
     resize: vertical;
 }
 
@@ -63,3 +106,6 @@ input[type=submit] {
 input[type=submit]:hover {
     background-color: rgb(209, 184, 226);
 }
+.form:hover {
+    box-shadow: 0 0 2rem gray;
+  }

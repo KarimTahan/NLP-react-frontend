@@ -1,0 +1,28 @@
+.widget {
+	width: 800px;
+    height: 300px;
+    align-content: center;
+	background-color:rgba(211, 211, 211,0.8);
+    position: relative;
+    border-radius: 25px;
+    top:100px;
+	bottom:0px;
+    padding: 30px;
+	left: 0;
+    color:black;
+    margin: auto;
+    font-size: large;
+    font-family: Arial, Helvetica, sans-serif;
+    
+    
+}
+.sweet-loading{
+    position:relative;
+    top:70px;
+	bottom:0;
+	left: 0;
+    right: 0;
+    text-align: center;
+    margin: auto;
+}
+
