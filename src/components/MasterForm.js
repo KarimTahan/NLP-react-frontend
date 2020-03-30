@@ -1,5 +1,6 @@
 import React from 'react';
 import '.././stylesheets/Form.css';
+import ModelData from './ModelDataToJSON';
 /**
  * Master form class, component implementing a Form with multiples steps before user completes.
  */
@@ -16,6 +17,8 @@ class MasterForm extends React.Component {
         text: '', 
       }
     }
+    
+
   //handles all changes between states
     handleChange = event => {
       const {name, value} = event.target
@@ -31,7 +34,12 @@ class MasterForm extends React.Component {
              Author: ${author} \n 
              Seed: ${seed} \n
              Text: ${text}`)
-  
+
+        console.log(
+            `Author: ${author} \n 
+            Seed: ${seed} \n
+            Text: ${text})`
+        );       
       }
 
     // **Functions keeping track of which step in the form the user is currently on 

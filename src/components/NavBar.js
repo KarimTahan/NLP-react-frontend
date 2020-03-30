@@ -1,19 +1,21 @@
 import React from 'react';
 import '.././stylesheets/NavBar.css';
 import '.././stylesheets/index.css';
+import { Link } from 'react-router-dom';
 
 //Nav bar Component
-const NavBar = () => {
-    return (
-        //nav bar JSX
-        <div className="NavBar">
-              <div class="topnav">
-                <a class="active" href="index.js"><b>Home</b></a>
-                <a href="About.html"><b>About</b></a>
-                <a href="OurAuthors.html"><b>Our Authors</b></a>
+class NavBar extends React.Component {
+    render(){
+        return (
+            //nav bar JSX
+            <div className="NavBar">
+                  <div class="topnav">
+                    <Link name="tab" class="active" to="/"><b>Home</b></Link>
+                    <Link name="tab" to="/About"><b>About</b></Link>
+                    <Link name="tab" to="/OurAuthors"><b>Our Authors</b></Link>
+                </div>
             </div>
-        </div>
-    );
+        );
+    }
 }
-
 export default NavBar;

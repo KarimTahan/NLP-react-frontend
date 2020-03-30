@@ -2,32 +2,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 //Components
-import Header from './components/Header';
-import Footer from './components/Footer';
-import Content from './components/Content';
+import Home from './components/Home';
 
 //Index stylee sheet
 import './stylesheets/index.css';
 
 //NOTE: Nav bar is within header
 //main app function rendering to web page
-function App() {
+class App extends React.Component {
+  render(){
   return (
     <div className="App">
-        <div className="top">
-            <Header/> 
-        </div>
-        <br/>
-        <div className="middle">
-            <Content/>
-        </div>
-      
-        <div className="Footer">
-              <Footer/>
-        </div>
+        <Home/>
     </div>
   );
-};
+  }
+}
 //Render to root from index.html
 ReactDOM.render(<App/>,document.getElementById('root'));
 export default App;//exporting  App;
