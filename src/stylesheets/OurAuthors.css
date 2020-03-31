@@ -1,0 +1,21 @@
+.shakespeare{
+    background-color:white;
+    width:400px;
+    height:400px;
+    border-radius:15px;
+    text-align: center;
+}
+#sp{
+    background-color: white;
+    border-radius: 15px;
+    height:40px;
+    padding:10px;
+}
+.shake{
+    text-align:center;
+    padding:10px;
+}
+img{
+   height:500x;
+   width : 500px;
+}

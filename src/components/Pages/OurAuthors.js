@@ -1,4 +1,6 @@
 import React from 'react';
+import '../.././stylesheets/OurAuthors.css';
+import Carousel from '.././Carousel';
 
 
 
@@ -6,7 +8,9 @@ class OurAuthors extends React.Component {
   render(){
     return (
         <div className="OurAuthors">
-           <h2>Our Authors</h2>
+           
+          <Carousel/>
+
         </div>
     );
   }
