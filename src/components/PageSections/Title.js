@@ -1,6 +1,6 @@
 import React from 'react';
-import '.././stylesheets/NavBar.css';
-import '.././stylesheets/index.css';
+import '../.././stylesheets/NavBar.css';
+import '../.././stylesheets/index.css';
 //Nav bar Component
 class Title extends React.Component {
     render(){

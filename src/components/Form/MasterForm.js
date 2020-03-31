@@ -1,6 +1,7 @@
 import React from 'react';
-import '.././stylesheets/Form.css';
-import ModelData from './ModelDataToJSON';
+import '../.././stylesheets/Form.css';
+import axios from 'axios';
+
 /**
  * Master form class, component implementing a Form with multiples steps before user completes.
  */
@@ -9,9 +10,7 @@ class MasterForm extends React.Component {
     constructor(props) {
       super(props)
       this.state = {
-        
         currentStep: 1,
-        currentTitle:'',
         author:'',
         seed: '',
         text: '', 
@@ -28,18 +27,27 @@ class MasterForm extends React.Component {
     }
   // On submit event   
     handleSubmit = event => {
-      event.preventDefault()
-      const { author,seed, text } = this.state
+      event.preventDefault()//prevent page refresh
+      const { author,seed, text } = this.state// state props
       alert(`Selected Properties: \n 
              Author: ${author} \n 
              Seed: ${seed} \n
-             Text: ${text}`)
+             Text: ${text}`)//DEBUG Alert on submit
+        //URL for POST Request     
+        var url = 'http://localhost:3000/submitted';
+        var generatedText; //save generated text from response in variable
+        
+        //POST Request when user submits data
+        axios.post(url,{ crossdomain: true },this.state)
+        .then( response => {//then save response in generatedText
+          generatedText = response;
+        })
+        .catch(error=> { //Catch Erorr print to console
+          console.log(error);
+        })
+        console.log(generatedText);//DEBUG
 
-        console.log(
-            `Author: ${author} \n 
-            Seed: ${seed} \n
-            Text: ${text})`
-        );       
+        
       }
 
     // **Functions keeping track of which step in the form the user is currently on 
@@ -165,7 +173,7 @@ class MasterForm extends React.Component {
         <div className="form-group">
             <h3>Select Author</h3>
                 <select id="author" name="author" onChange={props.handleChange}>
-                    <option hidden disabled selected value >Select Author..</option>
+                    <option hidden disabled selected value="" >Select Author..</option>
                     <option value="shakespear">Shakespear</option>
                     <option value="stephenKing">Stephen King</option>
                     <option value="EAP">Edgar Allan Poe</option>
@@ -181,7 +189,7 @@ class MasterForm extends React.Component {
     return(
         <div className="form-group">
             <h3>Seed Length</h3>
-            <input type="number" id="seed" name="seed"  onChange={props.handleChange} placeHolder="Seed Length"/>
+            <input type="number" id="seed" name="seed"  onChange={props.handleChange} placeholder="Seed Length"/>
         </div>
     );
   }
@@ -197,7 +205,7 @@ class MasterForm extends React.Component {
                   <h3>Starting Text</h3>
               </div>
                 
-              <textarea id="text" name="text" placeHolder="Write something.." onChange={props.handleChange} style={{height:'100px'}}></textarea>
+              <textarea id="text" name="text" placeholder="Write something.." onChange={props.handleChange} style={{height:'100px'}}></textarea>
               <br/>
               <input type="submit" value="Submit"/>
               <br/>
