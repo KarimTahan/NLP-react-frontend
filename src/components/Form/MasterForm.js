@@ -1,22 +1,32 @@
 import React from 'react';
 import '../.././stylesheets/Form.css';
+import Widget from '.././WidgetLoader';
+
 import axios from 'axios';
 
 /**
  * Master form class, component implementing a Form with multiples steps before user completes.
+ * Also handles submit and POST request
+ * Response is the generated text by the ML model
+ * Text is then formatted and displayed to the user
  */
-
 class MasterForm extends React.Component {
     constructor(props) {
       super(props)
       this.state = {
-        currentStep: 1,
-        author:'',
-        seed: '',
-        text: '', 
+          currentStep: 1,
+          author:'',
+		      length:'',
+          seed: ''
       }
     }
     
+    displayWidget = (props) =>{
+      return (
+        <Widget/>
+      )
+
+    };
 
   //handles all changes between states
     handleChange = event => {
@@ -25,29 +35,33 @@ class MasterForm extends React.Component {
         [name]: value
       })    
     }
+    
   // On submit event   
     handleSubmit = event => {
       event.preventDefault()//prevent page refresh
-      const { author,seed, text } = this.state// state props
-      alert(`Selected Properties: \n 
-             Author: ${author} \n 
-             Seed: ${seed} \n
-             Text: ${text}`)//DEBUG Alert on submit
+      const { author,length,seed} = this.state//state props
+             
         //URL for POST Request     
-        var url = 'http://localhost:3000/submitted';
+        var url = 'http://localhost:5000/prediction';
         var generatedText; //save generated text from response in variable
         
+        //Form Data obj
+        const formData = new FormData(event.target);
+        //append form data for multipart/form-data key:value
+        formData.append("author", author)
+        formData.append("length",length)
+        formData.append("seed",seed)
+
         //POST Request when user submits data
-        axios.post(url,{ crossdomain: true },this.state)
+        axios.post(url,formData)
         .then( response => {//then save response in generatedText
+          
           generatedText = response;
+          alert(generatedText.data.response); //DEBUG
         })
         .catch(error=> { //Catch Erorr print to console
           console.log(error);
         })
-        console.log(generatedText);//DEBUG
-
-        
       }
 
     // **Functions keeping track of which step in the form the user is currently on 
@@ -114,7 +128,7 @@ class MasterForm extends React.Component {
     if(currentStep === 2){
       return (
         <div>
-          <h4><u>Seed</u></h4>
+          <h4><u>Length</u></h4>
           <p>Note: The seed is the amount of characters you which to generate in the text.</p>
         </div>
       )
@@ -122,7 +136,7 @@ class MasterForm extends React.Component {
     if(currentStep===3){
       return(
         <div>
-          <h4><u>Text</u></h4>
+          <h4><u>Seed</u></h4>
           <p>Note: Start the generated text off with your own words.</p>
         </div>
       )
@@ -133,7 +147,7 @@ class MasterForm extends React.Component {
       return (
         <React.Fragment>
   
-        <form className="form" onSubmit={this.handleSubmit}>
+        <form className="form" onSubmit={this.handleSubmit} encType="multipart/form-data">
         {/* 
           render the form steps and pass required props in
         */}
@@ -147,13 +161,13 @@ class MasterForm extends React.Component {
             currentTitle='Seed Length'
             currentStep={this.state.currentStep} 
             handleChange={this.handleChange}
-            seed={this.state.seed}
+            length={this.state.length}
           />
           <Step3 
             currentTitle='Starting Text'
             currentStep={this.state.currentStep} 
             handleChange={this.handleChange}
-            text={this.state.text}
+            seed={this.state.seed}
           />
            {this.descriptionExample()}
            {this.previousButton()}
@@ -173,8 +187,8 @@ class MasterForm extends React.Component {
         <div className="form-group">
             <h3>Select Author</h3>
                 <select id="author" name="author" onChange={props.handleChange}>
-                    <option hidden disabled selected value="" >Select Author..</option>
-                    <option value="shakespear">Shakespear</option>
+                    <option hidden disabled ="" >Select Author..</option>
+                    <option value="shakespeare">Shakespear</option>
                     <option value="stephenKing">Stephen King</option>
                     <option value="EAP">Edgar Allan Poe</option>
                 </select>
@@ -189,7 +203,7 @@ class MasterForm extends React.Component {
     return(
         <div className="form-group">
             <h3>Seed Length</h3>
-            <input type="number" id="seed" name="seed"  onChange={props.handleChange} placeholder="Seed Length"/>
+            <input type="number" id="length" name="length"  onChange={props.handleChange} placeholder="Seed Length"/>
         </div>
     );
   }
@@ -205,7 +219,7 @@ class MasterForm extends React.Component {
                   <h3>Starting Text</h3>
               </div>
                 
-              <textarea id="text" name="text" placeholder="Write something.." onChange={props.handleChange} style={{height:'100px'}}></textarea>
+              <textarea id="seed" name="seed" placeholder="Write something.." onChange={props.handleChange} style={{height:'100px'}}></textarea>
               <br/>
               <input type="submit" value="Submit"/>
               <br/>
