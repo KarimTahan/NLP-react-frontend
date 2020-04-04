@@ -103,4 +103,6 @@ input[type=submit]:hover {
     background-color: rgb(92, 23, 138);
 }
 input,.form {box-sizing: border-box;}
-
+ .formError{
+     color:red;
+ }

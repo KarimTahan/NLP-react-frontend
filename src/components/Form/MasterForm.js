@@ -23,20 +23,30 @@ class MasterForm extends React.Component {
           seed: ''
       }
     }
-  //handles all changes between states
+  
+    /**
+     * Class Function handle state props on change of form step
+     * 
+     */
     handleChange = event => {
       const {name, value} = event.target
       this.setState({
         [name]: value
       })    
     }
-    //Function rendering widget on state
+    /**
+     * Function that renders the widget, while awaiting response from flask api
+     * Based on a flag set in the state props
+     */
     renderWidget(){
       return(
           <Widget/>
       )
     }
-    //Render form if show form is true
+   /**
+     * Function that renders the form
+     * Based on a flag set in the state props
+     */
     renderForm(){
       return (
         <form className="form" onSubmit={this.handleSubmit} encType="multipart/form-data">
@@ -69,16 +79,36 @@ class MasterForm extends React.Component {
       );
 
     }
+    /**
+     * Function that renders the generated text from the flask api
+     * Based on a flag set in the state props
+     */
+    renderText(){
+      return(
+        <div className="form">
+            <h3>Generated text...</h3>
+        </div>
+      );
+    }
 
-    //Asynchronous method
+    /**
+     * Function that send post request and sets the response(generated text) in the state props
+     * Also sets flags for which div to render from state props
+     * Async function
+     * @param {*} url 
+     * @param {*} formData 
+     */
     async getReponse(url,formData){
-      let response = await axios.post(url,formData)
-      let {text} = response.data;
-      this.setState({generatedText : text, showText:true, showWidget:false})
-      alert(this.state.generatedText); //DEBUG
+      let response = await axios.post(url,formData)//POST Request and Await response(Async)
+      let {text} = response.data;//store data in text
+      this.setState({generatedText : text, showText:true, showWidget:false})//set state prop
     }
     
-  // On submit event   
+  /**
+   * Function that handles event once user clicks on submit
+   * Append all fields in form to FormData format to send to Flask Api
+   * Note: Flask API also accepts JSON format  
+   */   
     handleSubmit = event => {
       this.setState({showWidget:true, showForm:false})
         
@@ -100,15 +130,19 @@ class MasterForm extends React.Component {
         
       }
 
-    // **Functions keeping track of which step in the form the user is currently on 
+    /**
+     * Function to keep track of current step of the user
+     */
     _next = () => {
       let currentStep = this.state.currentStep
-      currentStep = currentStep >= 2? 3: currentStep + 1
+      currentStep = currentStep >= 2? 3: currentStep + 1 
       this.setState({
         currentStep: currentStep
       })
     }
-      
+    /**
+     * Function keeping track of which step is the previous step
+     */
     _prev = () => {
       let currentStep = this.state.currentStep
       currentStep = currentStep <= 1? 1: currentStep - 1
@@ -118,7 +152,8 @@ class MasterForm extends React.Component {
     }
   
   /*
-  * the functions for our button
+  * Function used to render the previous button
+  * will not be rendrered if step is 1
   */
   previousButton() {
     let currentStep = this.state.currentStep;
@@ -134,7 +169,10 @@ class MasterForm extends React.Component {
     }
     return null;
   }
-  
+   /*
+  * Function used to render the next button
+  * will not be rendrered if step is 3
+  */
   nextButton(){
     let currentStep = this.state.currentStep;
     if(currentStep <3){
@@ -149,10 +187,12 @@ class MasterForm extends React.Component {
     }
     return null;
   }
-
+  /**
+   * Function meant to display form requirement/ examples the user must fill
+   */
   descriptionExample(){
     let currentStep = this.state.currentStep;
-    if(currentStep===1){
+    if(currentStep===1){ //Author
       return (
         <div>
           <h4><u>Author:</u></h4>
@@ -161,7 +201,7 @@ class MasterForm extends React.Component {
         </div>
       )
     }
-    if(currentStep === 2){
+    if(currentStep === 2){//Length
       return (
         <div>
           <h4><u>Length</u></h4>
@@ -169,7 +209,7 @@ class MasterForm extends React.Component {
         </div>
       )
     }
-    if(currentStep===3){
+    if(currentStep===3){//Seed
       return(
         <div>
           <h4><u>Seed</u></h4>
@@ -178,18 +218,25 @@ class MasterForm extends React.Component {
       )
     }
   }
-  
+  /**
+   * Main render, will render the div on which is flagged true
+   */
     render() {    
       return (
         <React.Fragment>
-          {this.state.showForm && this.renderForm()}
-          {this.state.showWidget && this.renderWidget()}
+          {this.state.showText && this.renderText()} {/**Generated Text*/ }
+          {this.state.showForm && this.renderForm()} {/**Form */}
+          {this.state.showWidget && this.renderWidget()}{/**Loading Widget */}
         </React.Fragment>
         
       );
     }
   }
-  //Step 1 Prompt user in form to select ML author model they wish to generate text from.
+  /**
+   * Prompts the user to select Author in which writting style they want the ML model to generate
+   * [Required Field]
+   * @param {*} props 
+   */
   function Step1(props) {
     if (props.currentStep !== 1) {
       return null
@@ -206,7 +253,11 @@ class MasterForm extends React.Component {
         </div>
     );
   }
-  
+  /**
+   * Function will prompt user to select the length of the text in chars generated in response from the Flask API
+   * [Required fields]
+   * @param {*} props 
+   */
   function Step2(props) {
     if (props.currentStep !== 2) {
       return null
@@ -218,7 +269,11 @@ class MasterForm extends React.Component {
         </div>
     );
   }
-  
+  /**
+   * Function allowing the user to generate the first sentence/sentences of the text
+   * [Required Field]
+   * @param {*} props 
+   */
   function Step3(props) {
     if (props.currentStep !== 3) {
       return null
