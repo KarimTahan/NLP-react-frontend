@@ -1,7 +1,7 @@
 import React from "react";
 import { css } from "@emotion/core";
 import FadeLoader from "react-spinners/FadeLoader";
-import '.././stylesheets/WidgetLoader.css';
+import '../.././stylesheets/WidgetLoader.css';
  
 // Can be a string as well. Need to ensure each key-value pair ends with ;
 const override = css`
@@ -10,7 +10,7 @@ const override = css`
   border-color: red;
 `;
  
-class WidgetComponent extends React.Component {
+export default class WidgetLoader extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -36,4 +36,3 @@ class WidgetComponent extends React.Component {
   }
 }
 
-export default WidgetComponent;

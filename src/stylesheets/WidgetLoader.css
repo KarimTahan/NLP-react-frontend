@@ -1,11 +1,11 @@
 .widget {
-	width: 800px;
+	width: 65%;
     height: 300px;
     align-content: center;
-	background-color:rgba(211, 211, 211,0.8);
+    background: rgba(250, 247, 247,0.2);
     position: relative;
     border-radius: 25px;
-    top:100px;
+    top:190px;
 	bottom:0px;
     padding: 30px;
 	left: 0;

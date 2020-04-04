@@ -1,6 +1,6 @@
 import React from 'react';
 import '../.././stylesheets/Form.css';
-
+import Widget from '../FutureDesign/WidgetLoader';
 import axios from 'axios';
 
 /**
@@ -13,15 +13,16 @@ class MasterForm extends React.Component {
     constructor(props) {
       super(props)
       this.state = {
+          showForm : true,
+          showWidget : false,
+          showText : false,
+          generatedText: '',
           currentStep: 1,
           author:'',
 		      length:'',
           seed: ''
       }
     }
-    
-
-
   //handles all changes between states
     handleChange = event => {
       const {name, value} = event.target
@@ -29,15 +30,63 @@ class MasterForm extends React.Component {
         [name]: value
       })    
     }
+    //Function rendering widget on state
+    renderWidget(){
+      return(
+          <Widget/>
+      )
+    }
+    //Render form if show form is true
+    renderForm(){
+      return (
+        <form className="form" onSubmit={this.handleSubmit} encType="multipart/form-data">
+        {/* 
+          render steps
+        */}
+          <Step1 
+            currentTitle='Choose Author'
+            currentStep={this.state.currentStep} 
+            handleChange={this.handleChange}
+            author={this.state.author}
+          />
+          <Step2 
+            currentTitle='Seed Length'
+            currentStep={this.state.currentStep} 
+            handleChange={this.handleChange}
+            length={this.state.length}
+          />
+          <Step3 
+            currentTitle='Starting Text'
+            currentStep={this.state.currentStep} 
+            handleChange={this.handleChange}
+            seed={this.state.seed}
+          />
+           {this.descriptionExample()}
+           {this.previousButton()}
+           {this.nextButton()}
+  
+        </form>
+      );
+
+    }
+
+    //Asynchronous method
+    async getReponse(url,formData){
+      let response = await axios.post(url,formData)
+      let {text} = response.data;
+      this.setState({generatedText : text, showText:true, showWidget:false})
+      alert(this.state.generatedText); //DEBUG
+    }
     
   // On submit event   
     handleSubmit = event => {
+      this.setState({showWidget:true, showForm:false})
+        
       event.preventDefault()//prevent page refresh
       const { author,length,seed} = this.state//state props
              
         //URL for POST Request     
         var url = 'http://localhost:5000/prediction';
-        var generatedText; //save generated text from response in variable
         
         //Form Data obj
         const formData = new FormData(event.target);
@@ -46,16 +95,9 @@ class MasterForm extends React.Component {
         formData.append("length",length)
         formData.append("seed",seed)
 
-        //POST Request when user submits data
-        axios.post(url,formData)
-        .then( response => {//then save response in generatedText
-          
-          generatedText = response;
-          alert(generatedText.data.response); //DEBUG
-        })
-        .catch(error=> { //Catch Erorr print to console
-          console.log(error);
-        })
+        this.getReponse(url,formData)
+        
+        
       }
 
     // **Functions keeping track of which step in the form the user is currently on 
@@ -136,38 +178,14 @@ class MasterForm extends React.Component {
       )
     }
   }
+  
     render() {    
       return (
         <React.Fragment>
-  
-        <form className="form" onSubmit={this.handleSubmit} encType="multipart/form-data">
-        {/* 
-          render the form steps and pass required props in
-        */}
-          <Step1 
-            currentTitle='Choose Author'
-            currentStep={this.state.currentStep} 
-            handleChange={this.handleChange}
-            author={this.state.author}
-          />
-          <Step2 
-            currentTitle='Seed Length'
-            currentStep={this.state.currentStep} 
-            handleChange={this.handleChange}
-            length={this.state.length}
-          />
-          <Step3 
-            currentTitle='Starting Text'
-            currentStep={this.state.currentStep} 
-            handleChange={this.handleChange}
-            seed={this.state.seed}
-          />
-           {this.descriptionExample()}
-           {this.previousButton()}
-           {this.nextButton()}
-  
-        </form>
+          {this.state.showForm && this.renderForm()}
+          {this.state.showWidget && this.renderWidget()}
         </React.Fragment>
+        
       );
     }
   }
@@ -207,16 +225,13 @@ class MasterForm extends React.Component {
     } 
     return(
       <React.Fragment>
-       <div className="steps">
-              <div className="titles">
-                  <h3>Starting Text</h3>
-              </div>
-                
-              <textarea id="seed" name="seed" placeholder="Write something.." onChange={props.handleChange} style={{height:'100px'}}></textarea>
-              <br/>
-              <input type="submit" value="Submit"/>
-              <br/>
-              <br/>          
+       <div className="form-group">
+          <h3>Starting Text</h3>   
+          <textarea id="seed" name="seed" placeholder="Write something.." onChange={props.handleChange} style={{height:'100px'}}></textarea>
+          <br/>
+          <input type="submit" value="Submit"/>
+          <br/>
+          <br/>          
         </div>     
       </React.Fragment>
     );
