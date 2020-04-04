@@ -1,6 +1,5 @@
 import React from 'react';
-import '../.././stylesheets/OurAuthors.css';
-import Carousel from '.././Carousel';
+import Carousel from '../FutureDesign/Carousel';
 
 
 

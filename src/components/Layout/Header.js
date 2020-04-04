@@ -1,8 +1,7 @@
 import React from 'react';
-import '../.././stylesheets/NavBar.css';
 import '../.././stylesheets/index.css';
 //Nav bar Component
-class Title extends React.Component {
+class Header extends React.Component {
     render(){
         return (
             //nav bar JSX
@@ -12,4 +11,4 @@ class Title extends React.Component {
         );
     }
 }
-export default Title;
+export default Header;

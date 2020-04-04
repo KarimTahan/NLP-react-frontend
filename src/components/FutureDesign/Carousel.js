@@ -2,13 +2,17 @@ import React from 'react';
 import Carousel from '@brainhubeu/react-carousel';
 import '@brainhubeu/react-carousel/lib/style.css';
 import '.././stylesheets/OurAuthors.css';
+/**
+ * Carousel designed to use to display Authors on Our Author page.
+ * Future Design... Create page, routes are complete
+ */
 
-
-export default class MyCarousel extends React.Component {
+export default class AuthorCarousel extends React.Component {
    
   render() {
   
     return (
+      //Carousel Class
       <Carousel arrows>
         <div className="shake">
           <h2 id="sp" >William Shakespeare</h2>

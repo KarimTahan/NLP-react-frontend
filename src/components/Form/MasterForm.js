@@ -1,6 +1,5 @@
 import React from 'react';
 import '../.././stylesheets/Form.css';
-import Widget from '.././WidgetLoader';
 
 import axios from 'axios';
 
@@ -21,12 +20,7 @@ class MasterForm extends React.Component {
       }
     }
     
-    displayWidget = (props) =>{
-      return (
-        <Widget/>
-      )
 
-    };
 
   //handles all changes between states
     handleChange = event => {
@@ -142,7 +136,6 @@ class MasterForm extends React.Component {
       )
     }
   }
-    
     render() {    
       return (
         <React.Fragment>
@@ -178,7 +171,7 @@ class MasterForm extends React.Component {
       );
     }
   }
-  
+  //Step 1 Prompt user in form to select ML author model they wish to generate text from.
   function Step1(props) {
     if (props.currentStep !== 1) {
       return null
@@ -189,8 +182,8 @@ class MasterForm extends React.Component {
                 <select id="author" name="author" onChange={props.handleChange}>
                     <option hidden disabled ="" >Select Author..</option>
                     <option value="shakespeare">Shakespear</option>
-                    <option value="stephenKing">Stephen King</option>
-                    <option value="EAP">Edgar Allan Poe</option>
+                    <option value="simpson">Homer Simpson</option>
+                    <option value="eap">Edgar Allan Poe</option>
                 </select>
         </div>
     );

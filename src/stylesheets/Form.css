@@ -1,17 +1,14 @@
 .form {
-	width: 60%;
+	width: 65%;
     height: 465px;
     align-content: center;
     background: rgba(254, 254, 254,0.6);
     position: relative;
-    border-color: 1px darkgrey;
     border-radius: 25px;
-    top:100px;
+    top:180px;
     padding: 40px;
 	left: 0;
-    color:black;
     margin: auto;
-    font-size: large;
     font-family: Arial, Helvetica, sans-serif;
     box-shadow: 0 0 2rem black;
 
@@ -26,12 +23,11 @@
     width: 100px;
     background-color: rgb(12, 60, 191);
     color: white;
-    border: none;
     border-radius: 4px;
-    cursor: pointer;
+   
 }
 #next:hover {
-    background-color: rgb(209, 184, 226);
+    background-color: rgb(23, 57, 247);
 }
 
 #previous{
@@ -40,22 +36,18 @@
     width: 100px;
     background-color: rgb(62, 62, 63);
     color: white;
-    border: none;
     border-radius: 4px;
-    cursor: pointer;
 }
 #previous:hover {
-    background-color: rgb(209, 184, 226);
+    background-color: rgb(98, 94, 100);
 }
 
 
-#author{
+select,option{
     font-size: 14pt;
     width: 100%;
     padding: 12px;
     color:black;
-    border: 1px solid darkgray;
-    border-radius: 4px;
     height: 50px;
     margin-top: 0px;
     margin-bottom: 10px;
@@ -87,7 +79,7 @@
 }
 input[type=text], textarea {
     font-size:10pt;
-    width: 95%;
+    width: 99%;
     padding: 12px;
     border: 1px solid darkgray;
     border-radius: 4px;
@@ -109,6 +101,7 @@ input[type=submit] {
 }
 
 input[type=submit]:hover {
-    background-color: rgb(209, 184, 226);
+    background-color: rgb(92, 23, 138);
 }
+input,.form {box-sizing: border-box;}
 

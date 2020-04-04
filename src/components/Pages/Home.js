@@ -8,11 +8,7 @@ import '../.././stylesheets/index.css';
 class Home extends React.Component{
     render(){
         return (  
-            <div className="App">
-                <div className="middle">
-                    <MasterForm/>
-                </div>
-            </div>
+            <MasterForm/>
           );
     }
 }
