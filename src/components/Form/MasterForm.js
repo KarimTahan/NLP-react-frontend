@@ -58,7 +58,7 @@ export default class MasterForm extends React.Component {
             currentTitle='Starting Text'
             currentStep={this.state.currentStep} 
             handleChange={this.handleChange}
-            seed={this.state.seed}
+            seed={this.state.seed.replace(/(\r\n|\n|\r)/gm, "")}
           />
            {this.descriptionExample()}
            {this.previousButton()}
@@ -76,7 +76,7 @@ export default class MasterForm extends React.Component {
       return(
         <div className="form">
             <p>
-              {this.state.generatedText}
+              {this.state.generatedText.replace(/\\n/g, "\n")}
             </p>
         </div>
       );
@@ -118,8 +118,10 @@ export default class MasterForm extends React.Component {
       this.setState({isLoading:true, showForm:false})
         
       event.preventDefault()//prevent page refresh
-      const { author,length,seed} = this.state//state props
-             
+      
+            const author = this.state.author
+            const length = this.state.length
+            const seed = this.state.seed.replace(/(\r\n|\n|\r)/gm, "")
         //URL for POST Request     
         var url = 'http://localhost:5000/prediction';
 
@@ -127,10 +129,10 @@ export default class MasterForm extends React.Component {
         var formData = new FormData(event.target);
         //append form data for multipart/form-data key:value
         //console.log(author + " "+ length + seed);
+        formData.delete('seed')
         formData.append('author', author)
         formData.append('length',length)
-        formData.append('seed',seed.trim())
-
+        formData.append('seed',seed.replace(/(\r\n|\n|\r)/gm, ""))
         this.getReponse(url,formData)
       }
 
