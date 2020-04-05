@@ -9,12 +9,12 @@ import axios from 'axios';
  * Response is the generated text by the ML model
  * Text is then formatted and displayed to the user
  */
-class MasterForm extends React.Component {
+export default class MasterForm extends React.Component {
     constructor(props) {
       super(props)
       this.state = {
           showForm : true,
-          showWidget : false,
+          isLoading : false,
           showText : false,
           generatedText: '',
           currentStep: 1,
@@ -22,17 +22,6 @@ class MasterForm extends React.Component {
 		      length:'',
           seed: ''
       }
-    }
-  
-    /**
-     * Class Function handle state props on change of form step
-     * 
-     */
-    handleChange = event => {
-      const {name, value} = event.target
-      this.setState({
-        [name]: value
-      })    
     }
     /**
      * Function that renders the widget, while awaiting response from flask api
@@ -86,7 +75,9 @@ class MasterForm extends React.Component {
     renderText(){
       return(
         <div className="form">
-            <h3>Generated text...</h3>
+            <p>
+              {this.state.generatedText}
+            </p>
         </div>
       );
     }
@@ -99,9 +90,23 @@ class MasterForm extends React.Component {
      * @param {*} formData 
      */
     async getReponse(url,formData){
-      let response = await axios.post(url,formData)//POST Request and Await response(Async)
-      let {text} = response.data;//store data in text
-      this.setState({generatedText : text, showText:true, showWidget:false})//set state prop
+       await axios.post(url,formData) //wait for response
+      .then(response =>{// then save response and set text visible and loading widget hidden
+         var resp = response;
+        this.setState({generatedText : resp.data.response});
+        this.setState({showText:true, isLoading:false});
+      });
+    }
+
+        /**
+     * Class Function handle state props on change of form step
+     * 
+     */
+    handleChange = event => {
+      const {name, value} = event.target
+      this.setState({
+        [name]: value
+      })    
     }
     
   /**
@@ -110,24 +115,23 @@ class MasterForm extends React.Component {
    * Note: Flask API also accepts JSON format  
    */   
     handleSubmit = event => {
-      this.setState({showWidget:true, showForm:false})
+      this.setState({isLoading:true, showForm:false})
         
       event.preventDefault()//prevent page refresh
       const { author,length,seed} = this.state//state props
              
         //URL for POST Request     
         var url = 'http://localhost:5000/prediction';
-        
+
         //Form Data obj
-        const formData = new FormData(event.target);
+        var formData = new FormData(event.target);
         //append form data for multipart/form-data key:value
-        formData.append("author", author)
-        formData.append("length",length)
-        formData.append("seed",seed)
+        //console.log(author + " "+ length + seed);
+        formData.append('author', author)
+        formData.append('length',length)
+        formData.append('seed',seed.trim())
 
         this.getReponse(url,formData)
-        
-        
       }
 
     /**
@@ -226,7 +230,7 @@ class MasterForm extends React.Component {
         <React.Fragment>
           {this.state.showText && this.renderText()} {/**Generated Text*/ }
           {this.state.showForm && this.renderForm()} {/**Form */}
-          {this.state.showWidget && this.renderWidget()}{/**Loading Widget */}
+          {this.state.isLoading && this.renderWidget()}{/**Loading Widget */}
         </React.Fragment>
         
       );
@@ -291,4 +295,3 @@ class MasterForm extends React.Component {
       </React.Fragment>
     );
   }
-export default MasterForm;
