@@ -20,7 +20,7 @@ export default class MasterForm extends React.Component {
           currentStep: 1,
           author:'',
 		      length:'',
-          seed: ''
+          seed: ' '
       }
     }
     /**
@@ -74,10 +74,17 @@ export default class MasterForm extends React.Component {
      */
     renderText(){
       return(
-        <div className="form">
+        <div className="output">
+
             <p>
-              {this.state.generatedText.replace(/\\n/g, "\n")}
+              {this.state.generatedText.replace(/\\n/g, " ")}
             </p>
+            <button
+          id="again" 
+          className="btn btn-primary float-right" 
+          type="button" onClick={this._again}>
+        Again
+        </button>
         </div>
       );
     }
@@ -115,25 +122,29 @@ export default class MasterForm extends React.Component {
    * Note: Flask API also accepts JSON format  
    */   
     handleSubmit = event => {
-      this.setState({isLoading:true, showForm:false})
+      if(this.state.currentStep ==3 && this.state.seed != null)
+      {
+        this.setState({isLoading:true, showForm:false})
         
-      event.preventDefault()//prevent page refresh
-      
-            const author = this.state.author
-            const length = this.state.length
-            const seed = this.state.seed.replace(/(\r\n|\n|\r)/gm, "")
-        //URL for POST Request     
-        var url = 'http://localhost:5000/prediction';
-
-        //Form Data obj
-        var formData = new FormData(event.target);
-        //append form data for multipart/form-data key:value
-        //console.log(author + " "+ length + seed);
-        formData.delete('seed')
-        formData.append('author', author)
-        formData.append('length',length)
-        formData.append('seed',seed.replace(/(\r\n|\n|\r)/gm, ""))
-        this.getReponse(url,formData)
+        event.preventDefault()//prevent page refresh
+        
+              const author = this.state.author
+              const length = this.state.length
+              const seed = this.state.seed
+          //URL for POST Request     
+          var url = 'http://localhost:5000/prediction';
+  
+          //Form Data obj
+          var formData = new FormData(event.target);
+          //append form data for multipart/form-data key:value
+          //console.log(author + " "+ length + seed);
+          formData.delete('seed')
+          formData.append('author', author)
+          formData.append('length',length)
+          formData.append('seed',seed.replace(/(\r\n|\n|\r|[0-9]|[^\x00-\x7F])/gm, ""))
+          this.getReponse(url,formData)
+      }
+      event.preventDefault()  
       }
 
     /**
@@ -146,6 +157,13 @@ export default class MasterForm extends React.Component {
         currentStep: currentStep
       })
     }
+
+    _again = () => {
+      window.location.reload();
+      return false;
+    }
+    
+
     /**
      * Function keeping track of which step is the previous step
      */
@@ -181,7 +199,25 @@ export default class MasterForm extends React.Component {
   */
   nextButton(){
     let currentStep = this.state.currentStep;
-    if(currentStep <3){
+    if(currentStep === 2 && this.state.length === "")
+      {
+        
+      return null;
+      }
+      else if(currentStep ===1 && this.state.author === "")
+      {
+        return null;
+      }
+      else if(currentStep > 2)
+      {
+        return null;
+      }
+      else if(currentStep === 2 && this.state.length < 0)
+      {
+        return null;
+      }
+      else
+      {
       return (
         <button
           id="next" 
@@ -191,7 +227,7 @@ export default class MasterForm extends React.Component {
         </button>        
       )
     }
-    return null;
+    
   }
   /**
    * Function meant to display form requirement/ examples the user must fill
@@ -250,7 +286,7 @@ export default class MasterForm extends React.Component {
     return(
         <div className="form-group">
             <h3>Select Author</h3>
-                <select id="author" name="author" onChange={props.handleChange}>
+                <select id="author" name="author" required onChange={props.handleChange}>
                     <option hidden disabled ="" >Select Author..</option>
                     <option value="shakespeare">Shakespear</option>
                     <option value="simpson">Homer Simpson</option>
@@ -271,7 +307,7 @@ export default class MasterForm extends React.Component {
     return(
         <div className="form-group">
             <h3>Seed Length</h3>
-            <input type="number" id="length" name="length"  onChange={props.handleChange} placeholder="Seed Length"/>
+            <input type="number" id="length" name="length" required  onChange={props.handleChange} placeholder="Seed Length"/>
         </div>
     );
   }
@@ -288,7 +324,7 @@ export default class MasterForm extends React.Component {
       <React.Fragment>
        <div className="form-group">
           <h3>Starting Text</h3>   
-          <textarea id="seed" name="seed" placeholder="Write something.." onChange={props.handleChange} style={{height:'100px'}}></textarea>
+          <textarea id="seed" name="seed"  placeholder="Write something.." required onChange={props.handleChange} style={{height:'100px'}}></textarea>
           <br/>
           <input type="submit" value="Submit"/>
           <br/>
