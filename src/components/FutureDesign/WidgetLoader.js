@@ -24,11 +24,11 @@ export default class WidgetLoader extends React.Component {
             <div className="sweet-loading">
                 <FadeLoader	
                 css={override}
-                size={250}
+                size={500}
                 color={"#123abc"}
                 loading={this.state.loading}
             />
-            <h4 id="loadText">Generating Text...</h4>
+            <h4 id="loadText">Generating Text... May Take a few Minutes</h4>
         </div>
         
       </div>

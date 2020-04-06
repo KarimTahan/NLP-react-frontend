@@ -2,9 +2,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Header from './components/Layout/Header';
-import Footer from './components/Layout/Footer';
-import Home from './components/Pages/Home';
-import { Switch, Route,BrowserRouter as Router } from 'react-router-dom';
+
+import MasterForm from './components/Form/MasterForm'
+
 //Components
 //Index stylee sheet
 import './stylesheets/index.css';
@@ -20,17 +20,16 @@ import './stylesheets/index.css';
 class App extends React.Component {
   render(){
   return (
-    <div className="App"> 
-      <Router>  
-        <Header/>
-        <Switch>
-            <Route exact path="/" component={Home}  />
-        </Switch>
-      </Router>
+    <div className="App Site">
+      <div className="Site-content">
+        <div className="App-header">
+            <Header />
+        </div>
+        <div className="main">
+            <MasterForm />
+        </div>
+        </div>
 
-      <div className="Footer">
-            <Footer/>
-      </div>   
     </div>
   );
   }

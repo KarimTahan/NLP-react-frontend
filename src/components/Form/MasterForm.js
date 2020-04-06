@@ -122,7 +122,7 @@ export default class MasterForm extends React.Component {
    * Note: Flask API also accepts JSON format  
    */   
     handleSubmit = event => {
-      if(this.state.currentStep ==3 && this.state.seed != null)
+      if(this.state.currentStep ===3 && this.state.seed != null)
       {
         this.setState({isLoading:true, showForm:false})
         
@@ -247,7 +247,8 @@ export default class MasterForm extends React.Component {
       return (
         <div>
           <h4><u>Length</u></h4>
-          <p>Note: The seed is the amount of characters you which to generate in the text.</p>
+          <p>Description:The seed is the amount of characters you which to generate in the text.</p>
+          <p>NOTE: Depending on the length; example 100,000 characters or more may take time</p>
         </div>
       )
     }
