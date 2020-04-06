@@ -141,10 +141,10 @@ export default class MasterForm extends React.Component {
           formData.delete('seed')
           formData.append('author', author)
           formData.append('length',length)
-          formData.append('seed',seed.replace(/(\r\n|\n|\r|[0-9]|[^\x00-\x7F])/gm, ""))
+          formData.append('seed',seed.replace(/(\r\n|\n|\r|[0-9]|[^\x20-\x21\x24\x26\x27\x2C-\x2E\x3A\x3B\x3F\x41-\x5A\x61-\x7A])/gm, "")+" ")
           this.getReponse(url,formData)
       }
-      event.preventDefault()  
+      event.preventDefault()
       }
 
     /**
@@ -293,6 +293,7 @@ export default class MasterForm extends React.Component {
                     <option value="simpson">Homer Simpson</option>
                     <option value="eap">Edgar Allan Poe</option>
                 </select>
+               
         </div>
     );
   }
