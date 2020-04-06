@@ -5,7 +5,7 @@
     background: rgba(254, 254, 254,0.6);
     position: relative;
     border-radius: 25px;
-    top:250px;
+    top:100px;
     padding: 40px;
 	left: 0;
     margin: auto;
@@ -23,7 +23,7 @@
     background: rgba(254, 254, 254,0.6);
     position: relative;
     border-radius: 25px;
-    top:250px;
+    top:100px;
     padding: 40px;
 	left: 0;
     margin: auto;
@@ -33,7 +33,7 @@
 
 }
 .output-div{
-    /*height:250px;*/
+    /*height:100px;*/
 }
 
 #next{
@@ -125,6 +125,7 @@ input[type=text], textarea {
 
 input[type=submit] {
     height:50px;
+    width:101%;
     background-color: rgb(67, 7, 103);
     color: white;
     padding: 12px 325px;
