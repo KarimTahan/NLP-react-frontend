@@ -10,7 +10,7 @@
 	left: 0;
     margin: auto;
     font-family: Arial, Helvetica, sans-serif;
-    box-shadow: 0 0 2rem black;
+    box-shadow: 0 0 2rem grey;
 
 }
 .form-div{
@@ -32,9 +32,7 @@
     
 
 }
-.output-div{
-    /*height:100px;*/
-}
+
 
 #next{
     

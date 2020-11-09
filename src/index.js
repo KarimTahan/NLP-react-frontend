@@ -4,6 +4,8 @@ import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
 import './stylesheets/index.css';
 import { Layout, Menu } from 'antd';
+import logo from './img/zady.png';
+
 
 
 import {
@@ -17,7 +19,7 @@ import MasterForm from './components/Form/MasterForm'
 const { Header, Sider, Content } = Layout; // 3 Layout Components Sider = Menu
 class App extends React.Component {
   state = { // Collapse menu
-    collapsed: false,
+    collapsed: true,// Default start app with collapsed menu
   };
 
   toggle = () => {
@@ -30,13 +32,15 @@ class App extends React.Component {
     return (
       <Layout>
         <Sider trigger={null} collapsible collapsed={this.state.collapsed}>
-          <div className="logo" />
+          <div className="logo" > 
+            <img src={logo}/>
+          </div>
           <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
             <Menu.Item key="1" icon={<RightOutlined />}>
               OurAuthors
             </Menu.Item>
             <Menu.Item key="2" icon={<RightOutlined />}>
-              OurDevs
+              About Us
             </Menu.Item>
           </Menu>
         </Sider>

@@ -12,8 +12,10 @@
   
 .logo {
     height: 40px;
-    background: rgba(255, 255, 255, 0.3);
     margin: 16px;
+  }
+  .logo img{
+      height:50px;
   }
   
 .site-layout .site-layout-background {

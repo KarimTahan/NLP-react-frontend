@@ -5,20 +5,20 @@
     background: rgba(254, 254, 254,0.6);
     position: relative;
     border-radius: 25px;
-    top:100px;
-	bottom:0px;
+    
+	
     padding: 30px;
 	left: 0;
     color:black;
     margin: auto;
-    font-size: large;
+    font-size: 200%;
     font-family: Arial, Helvetica, sans-serif;
     
     
 }
 .sweet-loading{
     position:relative;
-    top:70px;
+    top:80px;
 	bottom:0;
 	left: 0;
     right: 0;
