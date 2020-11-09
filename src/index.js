@@ -1,39 +1,69 @@
 //React Libraries
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Header from './components/Layout/Header';
+import 'antd/dist/antd.css';
+import './stylesheets/index.css';
+import { Layout, Menu } from 'antd';
+
+
+import {
+  MenuUnfoldOutlined,
+  MenuFoldOutlined,
+  RightOutlined
+} from '@ant-design/icons';
 
 import MasterForm from './components/Form/MasterForm'
 
-//Components
-//Index stylee sheet
-import './stylesheets/index.css';
-
-//NOTE: Nav bar is within header
-//main app function rendering to web page
-//NOTE Route is set up for NavBar wihtin components/PageSection future development (everything is set up). TODO Create pages 
-/**
- * Add to additional page route
- * <Route path="/About" component={} />
- * <Route path="/OurAuthors" component={} />
- */
+const { Header, Sider, Content } = Layout; // 3 Layout Components Sider = Menu
 class App extends React.Component {
-  render(){
-  return (
-    <div className="App Site">
-      <div className="Site-content">
-        <div className="App-header">
-            <Header />
-        </div>
-        <div className="main">
-            <MasterForm />
-        </div>
-        </div>
+  state = { // Collapse menu
+    collapsed: false,
+  };
 
-    </div>
-  );
+  toggle = () => {
+    this.setState({ // setting collapsible state
+      collapsed: !this.state.collapsed,
+    });
+  };
+
+  render() {
+    return (
+      <Layout>
+        <Sider trigger={null} collapsible collapsed={this.state.collapsed}>
+          <div className="logo" />
+          <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
+            <Menu.Item key="1" icon={<RightOutlined />}>
+              OurAuthors
+            </Menu.Item>
+            <Menu.Item key="2" icon={<RightOutlined />}>
+              OurDevs
+            </Menu.Item>
+          </Menu>
+        </Sider>
+        <Layout className="site-layout">
+          <Header className="site-layout-background" style={{ padding: 0 }}>
+            {React.createElement(this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
+              className: 'trigger',
+              onClick: this.toggle,
+            })}
+             Novel Generator
+          </Header>
+          <Content
+            className="site-layout-background"
+            style={{
+              margin: '24px 16px',
+              padding: 24,
+              minHeight: 280,
+            }}
+          >
+            <MasterForm></MasterForm>
+          </Content>
+        </Layout>
+      </Layout>
+    );
   }
 }
+
 //Render to root from index.html
-ReactDOM.render(<App/>,document.getElementById('root'));
+ReactDOM.render(<App/>,document.getElementById('app'));
 export default App;//exporting  App;
