@@ -33,9 +33,9 @@ class App extends React.Component {
       <Layout>
         <Sider trigger={null} collapsible collapsed={this.state.collapsed}>
           <div className="logo" > 
-            <img src={logo}/>
+            <img src={logo} alt="Zady logo"/>
           </div>
-          <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
+          <Menu theme="dark" mode="inline"  defaultSelectedKeys={['1']}>
             <Menu.Item key="1" icon={<RightOutlined />}>
               OurAuthors
             </Menu.Item>
