@@ -162,7 +162,6 @@ export default class MasterForm extends React.Component {
       window.location.reload();
       return false;
     }
-    
 
     /**
      * Function keeping track of which step is the previous step
@@ -204,9 +203,19 @@ export default class MasterForm extends React.Component {
         
       return null;
       }
-      else if(currentStep ===1 && this.state.author === "")
+      else if(currentStep === 1 && this.state.author === "")
       {
         return null;
+      }
+      else if (currentStep === 3){
+        return (
+          <button
+            id="next" 
+            className="btn btn-primary float-right" 
+            type="submit">
+          Submit
+          </button>        
+        )
       }
       else if(currentStep > 2)
       {
@@ -289,7 +298,7 @@ export default class MasterForm extends React.Component {
             <h3>Select Author</h3>
                 <select id="author" name="author" required onChange={props.handleChange}>
                     <option hidden disabled ="" >Select Author..</option>
-                    <option value="shakespeare">Shakespear</option>
+                    <option value="shakespeare">Shakespeare</option>
                     <option value="simpson">Homer Simpson</option>
                     <option value="poe">Edgar Allan Poe</option>
                 </select>
@@ -326,11 +335,7 @@ export default class MasterForm extends React.Component {
       <React.Fragment>
        <div className="form-group">
           <h3>Starting Text</h3>   
-          <textarea id="seed" name="seed"  placeholder="Write something.." required onChange={props.handleChange} style={{height:'100px'}}></textarea>
-          <br/>
-          <input type="submit" value="Submit"/>
-          <br/>
-          <br/>          
+          <textarea id="seed" name="seed"  placeholder="Write something.." required onChange={props.handleChange} style={{height:'100px'}}></textarea>        
         </div>     
       </React.Fragment>
     );
