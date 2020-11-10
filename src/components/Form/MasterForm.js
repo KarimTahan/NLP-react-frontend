@@ -2,6 +2,7 @@ import React from 'react';
 import '../.././stylesheets/Form.css';
 import Widget from '../FutureDesign/WidgetLoader';
 import axios from 'axios';
+import { Button } from 'antd';
 
 /**
  * Master form class, component implementing a Form with multiples steps before user completes.
@@ -75,16 +76,10 @@ export default class MasterForm extends React.Component {
     renderText(){
       return(
         <div className="output">
-
             <p>
               {this.state.generatedText.replace(/\\n/g, " ")}
             </p>
-            <button
-          id="again" 
-          className="btn btn-primary float-right" 
-          type="button" onClick={this._again}>
-        Again
-        </button>
+            <Button id="again" type="primary" onClick={this._again}>Again</Button>     
         </div>
       );
     }
@@ -182,12 +177,7 @@ export default class MasterForm extends React.Component {
     let currentStep = this.state.currentStep;
     if(currentStep !==1){
       return (
-        <button 
-          id="previous"
-          className="btn btn-secondary" 
-          type="button" onClick={this._prev}>
-        Previous
-        </button>
+        <Button id="previous" type="default" onClick={this._prev}>Previous</Button>     
       )
     }
     return null;
@@ -209,12 +199,7 @@ export default class MasterForm extends React.Component {
       }
       else if (currentStep === 3){
         return (
-          <button
-            id="next" 
-            className="btn btn-primary float-right" 
-            type="submit">
-          Submit
-          </button>        
+          <Button id="next" type="primary" onClick={this.handleSubmit}>Submit</Button>     
         )
       }
       else if(currentStep > 2)
@@ -228,12 +213,7 @@ export default class MasterForm extends React.Component {
       else
       {
       return (
-        <button
-          id="next" 
-          className="btn btn-primary float-right" 
-          type="button" onClick={this._next}>
-        Next
-        </button>        
+        <Button id="next" type="primary" onClick={this._next}>Next</Button>     
       )
     }
     
