@@ -194,31 +194,33 @@ export default class MasterForm extends React.Component {
     return null;
   }
 
-  /*
+/*
  * Function used to render the next button
  * will not be rendrered if step is 3
  */
   nextButton() {
     let currentStep = this.state.currentStep;
-    if (currentStep === 2 && this.state.length === "") {
+    if (currentStep === 2 && this.state.length === "") { //if user doesn't enter the text length, value 0 or less. Next button will not appear
 
       return null;
     }
-    else if (currentStep === 1 && this.state.author === "") {
+    else if (currentStep === 1 && this.state.author === "") { // if no author is selected, user will not see next step button
       return null;
     }
-    else if (currentStep === 3) {
+    else if(currentStep === 3 && this.state.seed <= 0) // If the text area(seed length) is less or equal to 0.. user cannot move on
+      return null;
+    else if (currentStep === 3) { // if text area is filled then show Submit button
       return (
         <Button id="next" type="primary" onClick={this.handleSubmit}>Submit</Button>
       )
     }
-    else if (currentStep > 2) {
+    else if (currentStep > 2) { // Do not show next button if we are on step 3
       return null;
     }
-    else if ((currentStep === 2 && this.state.length < 0) || (currentStep ===2 && this.state.length === 0)) {
+    else if (currentStep === 2 && this.state.length <= 0) { // if step 2 number entered is 0 or less do not show next button
       return null;
     }
-    else {
+    else { // any other case, where the steps form are filled, show next button
       return (
         <Button id="next" type="primary" onClick={this._next}>Next</Button>
       )
