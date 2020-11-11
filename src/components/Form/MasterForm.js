@@ -6,6 +6,7 @@ import { Button, Input, InputNumber, Form, Select } from 'antd';
 
 
 const { Option } = Select;
+const { TextArea } = Input;
 
 /**
  * Master form class, component implementing a Form with multiples steps before user completes.
@@ -24,10 +25,10 @@ export default class MasterForm extends React.Component {
       currentStep: 1,
       author: '',
       length: 0,
-      seed: ' '
+      seed: '',
     }
   }
-  
+
   /**
    * Function that renders the widget, while awaiting response from flask api
    * Based on a flag set in the state props
@@ -55,7 +56,7 @@ export default class MasterForm extends React.Component {
           author={this.state.author}
         />
         <Step2
-          currentTitle='Doc Length'
+          currentTitle='Word Length'
           currentStep={this.state.currentStep}
           handleChange={this.handleChange}
           length={this.state.length}
@@ -64,7 +65,7 @@ export default class MasterForm extends React.Component {
           currentTitle='Starting Text'
           currentStep={this.state.currentStep}
           handleChange={this.handleChange}
-          seed={this.state.seed}
+          seed={this.state.seed.toString().replace(/(\r\n|\n|\r)/gm, "")}
         />
         {this.descriptionExample()}
         {this.previousButton()}
@@ -105,14 +106,21 @@ export default class MasterForm extends React.Component {
       });
   }
 
-/**
-* Class Function handle state props on change of form step
-* 
-*/
+  /**
+  * Class Function handle state props on change of form step
+  * 
+  */
   handleChange = name => value => {
-    this.setState({
-      [name]: value
-    })
+    if (name === 'seed') {
+      var text_value = document.getElementById('seed').value.split('\n');
+      this.setState({
+        [name]: text_value
+      })
+    } else {
+      this.setState({
+        [name]: value
+      })
+    }
   }
 
   /**
@@ -139,7 +147,7 @@ export default class MasterForm extends React.Component {
       formData.delete('seed')
       formData.append('author', author)
       formData.append('length', Math.round(length))
-      formData.append('seed', seed)
+      formData.append('seed', seed.toString().replace(/(\r\n|\n|\r|[0-9]|[^\x20-\x21\x24\x26\x27\x2C-\x2E\x3A\x3B\x3F\x41-\x5A\x61-\x7A])/gm, "") + " ")
       this.getResponse(url, formData)
     }
     event.preventDefault()
@@ -215,7 +223,6 @@ export default class MasterForm extends React.Component {
         <Button id="next" type="primary" onClick={this._next}>Next</Button>
       )
     }
-
   }
 
   /**
@@ -227,8 +234,8 @@ export default class MasterForm extends React.Component {
       return (
         <div>
           <h4><u>Author:</u></h4>
-          <p>[Required] Select an author you which to mimic writing style.</p>
-          <p>Note: Author List is in drop down. If you which to read about our authors, visit Our Authors page.</p>
+          <p>[Required] Select an author you wish to mimic.</p>
+          <p>Note: The drop down contains a list of authors. If you wish to read about our authors, visit the 'Our Authors' page.</p>
         </div>
       )
     }
@@ -236,8 +243,8 @@ export default class MasterForm extends React.Component {
       return (
         <div>
           <h4><u>Length</u></h4>
-          <p>Description: The doc length </p>
-          <p>NOTE: Depending on the length, generation may take more</p>
+          <p>Description: Define the length of the resulting document in the amount of words you would like generated.</p>
+          <p>NOTE: This may take longer depending on the amount of words to be generated.</p>
         </div>
       )
     }
@@ -278,7 +285,7 @@ function Step1(props) {
   return (
     <div className="form-group">
       <h3>Select Author</h3>
-      <Select size="large" defaultValue="" id="author" name="author" placeholder="Select Author..." required onChange={props.handleChange("author")}>
+      <Select defaultValue="" id="author" name="author" size="large" style={{ width: "100%" }} placeholder="Select Author..." required onChange={props.handleChange("author")}>
         <Option disabled hidden value="" >Select Author..</Option>
         <Option value="shakespeare">Shakespeare</Option>
         <Option value="simpson">Homer Simpson</Option>
@@ -302,7 +309,9 @@ function Step2(props) {
   return (
     <div className="form-group">
       <h3>Doc Length</h3>
-      <InputNumber type="number" size="large" id="length" name="length" min={0} placeholder="Word Length" onChange={props.handleChange("length")} required />
+      <InputNumber type="number" style={{ width: "100%" }} id="length" name="length" min={0} placeholder="Word Length" onChange={props.handleChange("length")} required />
+      <br />
+      <br />
     </div>
   );
 }
@@ -320,7 +329,11 @@ function Step3(props) {
     <React.Fragment>
       <div className="form-group">
         <h3>Starting Text</h3>
-        <Input id="seed" name="seed" placeholder="Write something.." required onChange={props.handleChange("seed")} style={{ height: '100px' }}></Input>
+        <TextArea id='seed' name='seed' autoSize={{ minRows: 5, maxRows: 6 }}
+          showCount placeholder="Write something..." required
+          onChange={props.handleChange('seed')} style={{ height: '100px' }}></TextArea>
+        <br />
+        <br />
       </div>
     </React.Fragment>
   );
