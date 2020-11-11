@@ -2,7 +2,10 @@ import React from 'react';
 import '../.././stylesheets/Form.css';
 import Widget from '../FutureDesign/WidgetLoader';
 import axios from 'axios';
-import { Button } from 'antd';
+import { Button, Input, InputNumber, Form, Select} from 'antd';
+
+
+const { Option } = Select;
 
 /**
  * Master form class, component implementing a Form with multiples steps before user completes.
@@ -39,7 +42,7 @@ export default class MasterForm extends React.Component {
      */
     renderForm(){
       return (
-        <form className="form" onSubmit={this.handleSubmit} encType="multipart/form-data">
+        <Form className="form" onSubmit={this.handleSubmit} encType="multipart/form-data">
         {/* 
           render steps
         */}
@@ -50,7 +53,7 @@ export default class MasterForm extends React.Component {
             author={this.state.author}
           />
           <Step2 
-            currentTitle='Seed Length'
+            currentTitle='Doc Length'
             currentStep={this.state.currentStep} 
             handleChange={this.handleChange}
             length={this.state.length}
@@ -59,13 +62,13 @@ export default class MasterForm extends React.Component {
             currentTitle='Starting Text'
             currentStep={this.state.currentStep} 
             handleChange={this.handleChange}
-            seed={this.state.seed.replace(/(\r\n|\n|\r)/gm, "")}
+            seed={this.state.seed}
           />
            {this.descriptionExample()}
            {this.previousButton()}
            {this.nextButton()}
   
-        </form>
+        </Form>
       );
 
     }
@@ -91,7 +94,7 @@ export default class MasterForm extends React.Component {
      * @param {*} url 
      * @param {*} formData 
      */
-    async getReponse(url,formData){
+    async getResponse(url,formData){
        await axios.post(url,formData) //wait for response
       .then(response =>{// then save response and set text visible and loading widget hidden
          var resp = response;
@@ -104,8 +107,7 @@ export default class MasterForm extends React.Component {
      * Class Function handle state props on change of form step
      * 
      */
-    handleChange = event => {
-      const {name, value} = event.target
+    handleChange = name => value => {
       this.setState({
         [name]: value
       })    
@@ -130,14 +132,14 @@ export default class MasterForm extends React.Component {
           var url = 'http://localhost:5000/prediction';
   
           //Form Data obj
-          var formData = new FormData(event.target);
+          var formData = new FormData();
           //append form data for multipart/form-data key:value
           //console.log(author + " "+ length + seed);
           formData.delete('seed')
           formData.append('author', author)
           formData.append('length', Math.round(length))
-          formData.append('seed',seed.replace(/(\r\n|\n|\r|[0-9]|[^\x20-\x21\x24\x26\x27\x2C-\x2E\x3A\x3B\x3F\x41-\x5A\x61-\x7A])/gm, "")+" ")
-          this.getReponse(url,formData)
+          formData.append('seed',seed)
+          this.getResponse(url,formData)
       }
       event.preventDefault()
       }
@@ -276,13 +278,14 @@ export default class MasterForm extends React.Component {
     return(
         <div className="form-group">
             <h3>Select Author</h3>
-                <select id="author" name="author" required onChange={props.handleChange}>
-                    <option hidden disabled ="" >Select Author..</option>
-                    <option value="shakespeare">Shakespeare</option>
-                    <option value="simpson">Homer Simpson</option>
-                    <option value="poe">Edgar Allan Poe</option>
-                </select>
-               
+                <Select size="large" defaultValue="" id="author" name="author" placeholder="Select Author..." required onChange={props.handleChange("author")}>
+                    <Option disabled hidden value="" >Select Author..</Option>
+                    <Option value="shakespeare">Shakespeare</Option>
+                    <Option value="simpson">Homer Simpson</Option>
+                    <Option value="poe">Edgar Allan Poe</Option>
+                </Select>
+            <br/>
+            <br/>
         </div>
     );
   }
@@ -297,8 +300,8 @@ export default class MasterForm extends React.Component {
     } 
     return(
         <div className="form-group">
-            <h3>Seed Length</h3>
-            <input type="number" id="length" name="length" required  onChange={props.handleChange} placeholder="Seed Length"/>
+            <h3>Doc Length</h3>
+            <InputNumber type="number" size="large" id="length" name="length" min={0} placeholder="Word Length" onChange={props.handleChange("length")} required/>
         </div>
     );
   }
@@ -315,7 +318,7 @@ export default class MasterForm extends React.Component {
       <React.Fragment>
        <div className="form-group">
           <h3>Starting Text</h3>   
-          <textarea id="seed" name="seed"  placeholder="Write something.." required onChange={props.handleChange} style={{height:'100px'}}></textarea>        
+          <Input id="seed" name="seed" placeholder="Write something.." required onChange={props.handleChange("seed")} style={{height:'100px'}}></Input>        
         </div>     
       </React.Fragment>
     );
