@@ -215,7 +215,7 @@ export default class MasterForm extends React.Component {
     else if (currentStep > 2) {
       return null;
     }
-    else if (currentStep === 2 && this.state.length < 0) {
+    else if ((currentStep === 2 && this.state.length < 0) || (currentStep ===2 && this.state.length === 0)) {
       return null;
     }
     else {
@@ -330,8 +330,8 @@ function Step3(props) {
       <div className="form-group">
         <h3>Starting Text</h3>
         <TextArea id='seed' name='seed' autoSize={{ minRows: 5, maxRows: 6 }}
-          showCount placeholder="Write something..." required
-          onChange={props.handleChange('seed')} style={{ height: '100px' }}></TextArea>
+          showCount placeholder="Write something..." 
+          onChange={props.handleChange('seed')} style={{ height: '100px' }} required></TextArea>
         <br />
         <br />
       </div>
