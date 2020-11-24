@@ -1,5 +1,4 @@
 import React from 'react';
-import Homer_Simpson from '../../img/Homer_Simpson_2006.png';
 import 'antd/dist/antd.css';
 import '../../stylesheets/index.css';
 import { Carousel } from 'antd';

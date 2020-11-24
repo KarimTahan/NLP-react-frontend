@@ -1,12 +1,16 @@
 import React from 'react';
-import '../.././stylesheets/Form.css';
+//import '../.././stylesheets/Form.css';
 import Widget from '../Widget/WidgetLoader';
 import axios from 'axios';
-import { Button, Input, InputNumber, Form, Select } from 'antd';
+import {Button, Input, InputNumber, Form, Select } from 'antd';
+
 
 
 const { Option } = Select;
 const { TextArea } = Input;
+
+
+
 
 /**
  * Master form class, component implementing a Form with multiples steps before user completes.
@@ -29,6 +33,8 @@ export default class MasterForm extends React.Component {
     }
   }
 
+  
+
   /**
    * Function that renders the widget, while awaiting response from flask api
    * Based on a flag set in the state props
@@ -45,7 +51,7 @@ export default class MasterForm extends React.Component {
     */
   renderForm() {
     return (
-      <Form className="form" onSubmit={this.handleSubmit} encType="multipart/form-data">
+      < Form className="form" onSubmit={this.handleSubmit} encType="multipart/form-data">
         {/* 
           render steps
         */}
@@ -70,7 +76,6 @@ export default class MasterForm extends React.Component {
         {this.descriptionExample()}
         {this.previousButton()}
         {this.nextButton()}
-
       </Form>
     );
   }
