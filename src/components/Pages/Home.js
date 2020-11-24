@@ -1,6 +1,6 @@
 //React Libraries
 import React from 'react';
-
+import { PageHeader } from 'antd';
 import 'antd/dist/antd.css';
 import '../../stylesheets/index.css';
 import { Layout, Menu } from 'antd';
@@ -59,8 +59,8 @@ class Home extends React.Component {
                                         
                     </Menu>
                 </Sider>
-                <Layout className="site-layout">
-                    <Header className="site-layout-background" style={{ padding: 0 }}>
+                <Layout className="layout">
+                    <Header id="title"  className="layout-background" style={{ padding: 0 }}>
                         {React.createElement(this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
                         className: 'trigger',
                         onClick: this.toggle,
@@ -68,7 +68,7 @@ class Home extends React.Component {
                         Novel Generator
                     </Header>
                     <Content
-                    className="site-layout-background"
+                    className="layout-background"
                     style={{
                         margin: '24px 16px',
                         padding: 24,

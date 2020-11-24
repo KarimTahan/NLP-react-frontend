@@ -1,4 +1,5 @@
 //React Libraries
+import Carousel from '../Carousel/AuthorCarousel'
 import React from 'react';
 import 'antd/dist/antd.css';
 import '../../stylesheets/index.css';
@@ -54,8 +55,8 @@ class OurAuthors extends React.Component {
                                         
                     </Menu>
                 </Sider>
-                <Layout className="site-layout">
-                    <Header className="site-layout-background" style={{ padding: 0 }}>
+                <Layout className="layout">
+                    <Header id="title" className="layout-background" style={{ padding: 0 }}>
                         {React.createElement(this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
                         className: 'trigger',
                         onClick: this.toggle,
@@ -63,13 +64,14 @@ class OurAuthors extends React.Component {
                         Novel Generator
                     </Header>
                     <Content
-                    className="site-layout-background"
+                    className="layout-background"
                     style={{
                         margin: '24px 16px',
                         padding: 24,
                         minHeight: 280,
                     }}
                     >  
+                    <Carousel></Carousel>
                     </Content>
                 </Layout>
             </Layout>

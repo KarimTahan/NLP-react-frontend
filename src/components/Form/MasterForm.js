@@ -1,6 +1,6 @@
 import React from 'react';
 import '../.././stylesheets/Form.css';
-import Widget from '../FutureDesign/WidgetLoader';
+import Widget from '../Widget/WidgetLoader';
 import axios from 'axios';
 import { Button, Input, InputNumber, Form, Select } from 'antd';
 
