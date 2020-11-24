@@ -49,13 +49,7 @@ class Home extends React.Component {
                             <Link to="/OurAuthors">
                                 OurAuthors
                             </Link>
-                        </Menu.Item>   
-                        <Menu.Item key="3" icon={<RightOutlined />}>
-                            <Link to="/About"> 
-                                About Us
-                            </Link>
-                        </Menu.Item>
-                                        
+                        </Menu.Item>                               
                     </Menu>
                 </Sider>
                 <Layout className="layout">

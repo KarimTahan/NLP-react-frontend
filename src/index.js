@@ -5,7 +5,6 @@ import 'antd/dist/antd.css';
 import './stylesheets/index.css';
 import Home from './components/Pages/Home'
 import OurAuthors from './components/Pages/OurAuthors'
-import About from './components/Pages/About'
 import {BrowserRouter,Route,Switch} from 'react-router-dom'
 
 
@@ -25,7 +24,6 @@ class App extends React.Component {
       <BrowserRouter>
         <Switch>
           <Route path="/" component={Home} exact />
-          <Route path="/about" component={About} />
           <Route path="/OurAuthors" component={OurAuthors} />
         </Switch>
      </BrowserRouter>

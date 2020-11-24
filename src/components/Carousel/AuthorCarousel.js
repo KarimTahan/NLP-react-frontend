@@ -6,7 +6,7 @@ import EAP from '../../img/portrait-62996_1280.jpg'
 import Shake from '../../img/william-shakespeare.jpg'
 import '../../stylesheets/index.css';
 import {Carousel } from 'antd';
-import { PageHeader } from 'antd';
+import { PageHeader, Image } from 'antd';
 
 var styles = {
   container:{
@@ -21,23 +21,19 @@ var styles = {
 
 }
 
-
-
-
-
 class AuthorCarousel extends React.Component{
 
 
   render() {
     return(
-        <Carousel effect="fade" >
+        <Carousel effect="fade" autoplay >
           <div >
             <PageHeader style={styles.PageHeaderStyle}
                 title="William Shakespeare"
                 subTitle="Model"
             />
             <div >
-              <img src={Shake} alt="William Shakespeare"/>
+              <Image className="Image" height="600" width="400" src={Shake} alt="William Shakespeare"/>
             </div>
           </div>
           <div>
@@ -46,7 +42,7 @@ class AuthorCarousel extends React.Component{
                 subTitle="Model"
             />
             <div >
-              <img src={EAP} alt="Edgar Allan Poe"/>
+              <Image className="Image" height="600" width="400" src={EAP} alt="Edgar Allan Poe"/>
             </div>
           </div>
           <div style={styles.container}>
@@ -55,7 +51,7 @@ class AuthorCarousel extends React.Component{
                 subTitle="Model"
             />
             <div>
-              <img  className="Simpsons"  src={Simpsons} alt="Simpsons"/>
+              <Image  className="Image" height="300" width="500" src={Simpsons} alt="Simpsons"/>
             </div>
           </div>
           <div>

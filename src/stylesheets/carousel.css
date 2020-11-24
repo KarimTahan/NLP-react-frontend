@@ -1,20 +1,10 @@
- img{
+ .Image {
     width: auto;
-    height: 500px;
-    max-height: 500px;
     margin: auto;
     padding: 5px; 
     display: block;
     }
 
-.simpsons{
-    width: auto;
-    height: 300px;
-    max-height: 500px;
-    margin: auto;
-    padding: 5px; 
-    display: block;
-}
 
 .ant-carousel .slick-dots li button {
     background: #000000;
