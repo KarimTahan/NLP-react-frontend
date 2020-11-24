@@ -1,10 +1,14 @@
 //React Libraries
 import React from 'react';
+
 import 'antd/dist/antd.css';
 import '../../stylesheets/index.css';
 import { Layout, Menu } from 'antd';
 import logo from '../../img/zady.png';
 import {Link} from 'react-router-dom'
+
+
+
 import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
@@ -13,11 +17,12 @@ import {
 } from 
 '@ant-design/icons';
 
+import MasterForm from '../Form/MasterForm'
 import MenuItem from 'antd/lib/menu/MenuItem';
 const { Header, Sider, Content } = Layout; // 3 Layout Components Sider = Menu
 
 
-class OurAuthors extends React.Component {
+class Home extends React.Component {
     state = { // Collapse menu
       collapsed: true,// Default start app with collapsed menu
     };
@@ -69,12 +74,12 @@ class OurAuthors extends React.Component {
                         padding: 24,
                         minHeight: 280,
                     }}
-                    >  
+                    >
+                        <MasterForm></MasterForm>
                     </Content>
                 </Layout>
             </Layout>
         );
     }
 }
-  //Render to root from index.html
-  export default OurAuthors;//exporting  App;
+export default Home;
