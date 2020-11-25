@@ -96,6 +96,7 @@ export default class MasterForm extends React.Component {
         />
         {this.descriptionExample()}
         {this.previousButton()}
+        &nbsp;&nbsp;
         {this.nextButton()}
 
       </Form>
