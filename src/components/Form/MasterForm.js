@@ -1,22 +1,11 @@
 import React from 'react';
 import Widget from '../Widget/WidgetLoader';
 import axios from 'axios';
-import { Button, InputNumber, Form, Select, Steps, Popover } from 'antd';
+import { Button, InputNumber, Form, Select, Steps } from 'antd';
 
 
 const { Option } = Select;
 const { Step } = Steps;
-const customDot = (dot, { status, index }) => (
-  <Popover
-    content={
-      <span>
-        step {index} status: {status}
-      </span>
-    }
-  >
-    {dot}
-  </Popover>
-);
 
 /**
  * Master form class, component implementing a Form with multiples steps before user completes.
@@ -52,11 +41,11 @@ export default class MasterForm extends React.Component {
   renderSteps(){
     return (
       <div>
-      <Steps current = {this.state.currentStep-1} progressDot={customDot}>
-          <Step title="Author"/>
-          <Step title="Word Length"/>
-          <Step title="Seed Text"/>
-          <Step title="Generate Text"/>
+      <Steps current = {this.state.currentStep-1} progressDot>
+          <Step title="Author" />
+          <Step title="Word Length" />
+          <Step title="Seed Text" />
+          <Step title="Generate Text" />
       </Steps>
       <br/>
       <br/>
@@ -167,7 +156,7 @@ export default class MasterForm extends React.Component {
       formData.delete('seed')
       formData.append('author', author)
       formData.append('length', Math.round(length))
-      formData.append('seed', seed.toString().replace(/(\r\n|\n|\r|[0-9]|[^\x20-\x21\x24\x26\x27\x2C-\x2E\x3A\x3B\x3F\x41-\x5A\x61-\x7A])/gm, "") + " ")
+      formData.append('seed', seed)
       this.getResponse(url, formData)
     }
     event.preventDefault()
@@ -221,7 +210,6 @@ export default class MasterForm extends React.Component {
   nextButton() {
     let currentStep = this.state.currentStep;
     if (currentStep === 2 && this.state.length === "") { //if user doesn't enter the text length, value 0 or less. Next button will not appear
-
       return null;
     }
     else if (currentStep === 1 && this.state.author === "") { // if no author is selected, user will not see next step button
@@ -291,7 +279,6 @@ export default class MasterForm extends React.Component {
         {this.state.showForm && this.renderForm()} {/**Form */}
         {this.state.isLoading && this.renderWidget()}{/**Loading Widget */}
       </React.Fragment>
-
     );
   }
 }
@@ -307,9 +294,9 @@ function Step1(props) {
   }
   return (
     <div className="form-group">
-      <h3>Select Author</h3>
+      <h3>Author</h3>
       <Select defaultValue="" id="author" name="author" size="large" style={{ width: "100%" }} placeholder="Select Author..." required onChange={props.handleChange("author")}>
-        <Option disabled hidden value="" >Select Author..</Option>
+        <Option disabled hidden value="" >-- Select Author --</Option>
         <Option value="shakespeare">Shakespeare</Option>
         <Option value="simpson">Homer Simpson</Option>
         <Option value="poe">Edgar Allan Poe</Option>
@@ -332,7 +319,7 @@ function Step2(props) {
   return (
     <div className="form-group">
       <h3>Doc Length</h3>
-      <InputNumber type="number" style={{ width: "100%" }} id="length" name="length" min={0} placeholder="Word Length" onChange={props.handleChange("length")} required />
+      <InputNumber type="number" style={{ width: "100%" }} size="large" id="length" name="length" min={0} placeholder="Word Length" onChange={props.handleChange("length")} required />
       <br />
       <br />
     </div>
@@ -353,7 +340,7 @@ function Step3(props) {
       <React.Fragment>
         <div className="form-group">
           <h3>Starting Text</h3>
-                <Select defaultValue="" id="seed" name="seed" size="medium" style={{ width: "100%" }} placeholder="Select Seed" required onChange={props.handleChange("seed")}>
+                <Select defaultValue="" id="seed" name="seed" size="large" style={{ width: "100%" }} placeholder="Select Seed" required onChange={props.handleChange("seed")}>
                   <Option disabled hidden value="">-- Select a Seed --</Option>
                   <Option value="shakespeare">Shakespeare</Option>
                 </Select>
@@ -367,7 +354,7 @@ function Step3(props) {
       <React.Fragment>
         <div className="form-group">
           <h3>Starting Text</h3>
-                <Select defaultValue="" id="seed" name="seed" size="medium" style={{ width: "100%" }} placeholder="Select Seed" required onChange={props.handleChange("seed")}>
+                <Select defaultValue="" id="seed" name="seed" size="large" style={{ width: "100%" }} placeholder="Select Seed" required onChange={props.handleChange("seed")}>
                   <Option disabled hidden value="" >-- Select a Seed --</Option>
                   <Option value="Edgar Allen Poe">Edgar Allen Poe</Option>
                 </Select>
@@ -381,7 +368,7 @@ function Step3(props) {
       <React.Fragment>
         <div className="form-group">
           <h3>Starting Text</h3>
-                <Select defaultValue="" id="seed" name="seed" size="medium" style={{ width: "100%" }} placeholder="Select Seed" required onChange={props.handleChange("seed")}>
+                <Select defaultValue="" id="seed" name="seed" size="large" style={{ width: "100%" }} placeholder="Select Seed" required onChange={props.handleChange("seed")}>
                   <Option disabled hidden value="" >-- Select a Seed --</Option>
                   <Option value="simpson">Simpson</Option>
                 </Select>
