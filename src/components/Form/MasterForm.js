@@ -1,11 +1,10 @@
 import React from 'react';
 import Widget from '../Widget/WidgetLoader';
 import axios from 'axios';
-import { Button, Input, InputNumber, Form, Select, Steps, Popover } from 'antd';
+import { Button, InputNumber, Form, Select, Steps, Popover } from 'antd';
 
 
 const { Option } = Select;
-const { TextArea } = Input;
 const { Step } = Steps;
 const customDot = (dot, { status, index }) => (
   <Popover
@@ -92,7 +91,8 @@ export default class MasterForm extends React.Component {
           currentTitle='Starting Text'
           currentStep={this.state.currentStep}
           handleChange={this.handleChange}
-          seed={this.state.seed.toString().replace(/(\r\n|\n|\r)/gm, "")}
+          seed={this.state.seed}
+          author={this.state.author}
         />
         {this.descriptionExample()}
         {this.previousButton()}
@@ -139,16 +139,9 @@ export default class MasterForm extends React.Component {
   * 
   */
   handleChange = name => value => {
-    if (name === 'seed') {
-      var text_value = document.getElementById('seed').value.split('\n');
-      this.setState({
-        [name]: text_value
-      })
-    } else {
       this.setState({
         [name]: value
       })
-    }
   }
 
   /**
@@ -355,16 +348,48 @@ function Step3(props) {
   if (props.currentStep !== 3) {
     return null
   }
-  return (
-    <React.Fragment>
-      <div className="form-group">
-        <h3>Starting Text</h3>
-        <TextArea id='seed' name='seed' autoSize={{ minRows: 5, maxRows: 6 }}
-          showCount placeholder="Write something..." 
-          onChange={props.handleChange('seed')} style={{ height: '100px' }} required></TextArea>
-        <br />
-        <br />
-      </div>
-    </React.Fragment>
-  );
+  console.log(props.author)
+  if(props.author  === 'shakespeare'){
+    return (
+      <React.Fragment>
+        <div className="form-group">
+          <h3>Starting Text</h3>
+                <Select defaultValue="" id="seed" name="seed" size="medium" style={{ width: "100%" }} placeholder="Select Seed" required onChange={props.handleChange("seed")}>
+                  <Option disabled hidden value="">-- Select a Seed --</Option>
+                  <Option value="shakespeare">Shakespeare</Option>
+                </Select>
+          <br />
+          <br />
+        </div>
+      </React.Fragment>
+    );
+  } else if (props.author === 'poe') {
+    return (
+      <React.Fragment>
+        <div className="form-group">
+          <h3>Starting Text</h3>
+                <Select defaultValue="" id="seed" name="seed" size="medium" style={{ width: "100%" }} placeholder="Select Seed" required onChange={props.handleChange("seed")}>
+                  <Option disabled hidden value="" >-- Select a Seed --</Option>
+                  <Option value="Edgar Allen Poe">Edgar Allen Poe</Option>
+                </Select>
+          <br />
+          <br />
+        </div>
+      </React.Fragment>
+    );
+  } else if (props.author === 'simpson'){
+    return (
+      <React.Fragment>
+        <div className="form-group">
+          <h3>Starting Text</h3>
+                <Select defaultValue="" id="seed" name="seed" size="medium" style={{ width: "100%" }} placeholder="Select Seed" required onChange={props.handleChange("seed")}>
+                  <Option disabled hidden value="" >-- Select a Seed --</Option>
+                  <Option value="simpson">Simpson</Option>
+                </Select>
+          <br />
+          <br />
+        </div>
+      </React.Fragment>
+    );
+  }
 }
