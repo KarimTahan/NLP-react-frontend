@@ -1,16 +1,13 @@
 import React from 'react';
-//import '../.././stylesheets/Form.css';
+import '../.././stylesheets/Form.css';
 import Widget from '../Widget/WidgetLoader';
 import axios from 'axios';
-import {Button, Input, InputNumber, Form, Select } from 'antd';
-
+import { Button, Input, InputNumber, Form, Select, Steps } from 'antd';
 
 
 const { Option } = Select;
 const { TextArea } = Input;
-
-
-
+const { Step } = Steps;
 
 /**
  * Master form class, component implementing a Form with multiples steps before user completes.
@@ -33,8 +30,6 @@ export default class MasterForm extends React.Component {
     }
   }
 
-  
-
   /**
    * Function that renders the widget, while awaiting response from flask api
    * Based on a flag set in the state props
@@ -45,13 +40,26 @@ export default class MasterForm extends React.Component {
     )
   }
 
+  renderSteps(){
+    return (
+      <div>
+      <Steps size="small" current = {this.state.currentStep-1}>
+          <Step title="Author"/>
+          <Step title="Word Length"/>
+          <Step title="Seed Text"/>
+          <Step title="Generate Text"/>
+      </Steps>
+      </div>
+    )
+  }
+
   /**
     * Function that renders the form
     * Based on a flag set in the state props
     */
   renderForm() {
     return (
-      < Form className="form" onSubmit={this.handleSubmit} encType="multipart/form-data">
+      <Form className="form" onSubmit={this.handleSubmit} encType="multipart/form-data">
         {/* 
           render steps
         */}
@@ -76,6 +84,7 @@ export default class MasterForm extends React.Component {
         {this.descriptionExample()}
         {this.previousButton()}
         {this.nextButton()}
+
       </Form>
     );
   }
@@ -135,7 +144,7 @@ export default class MasterForm extends React.Component {
    */
   handleSubmit = event => {
     if (this.state.currentStep === 3 && this.state.seed != null) {
-      this.setState({ isLoading: true, showForm: false })
+      this.setState({ isLoading: true, showForm: false, currentStep: 4 })
 
       event.preventDefault()//prevent page refresh
 
@@ -148,7 +157,6 @@ export default class MasterForm extends React.Component {
       //Form Data obj
       var formData = new FormData();
       //append form data for multipart/form-data key:value
-      //console.log(author + " "+ length + seed);
       formData.delete('seed')
       formData.append('author', author)
       formData.append('length', Math.round(length))
@@ -271,6 +279,7 @@ export default class MasterForm extends React.Component {
   render() {
     return (
       <React.Fragment>
+        {this.renderSteps()}
         {this.state.showText && this.renderText()} {/**Generated Text*/}
         {this.state.showForm && this.renderForm()} {/**Form */}
         {this.state.isLoading && this.renderWidget()}{/**Loading Widget */}
