@@ -348,7 +348,6 @@ function Step3(props) {
   if (props.currentStep !== 3) {
     return null
   }
-  console.log(props.author)
   if(props.author  === 'shakespeare'){
     return (
       <React.Fragment>
