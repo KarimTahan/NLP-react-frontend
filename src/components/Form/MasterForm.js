@@ -301,6 +301,7 @@ function Step1(props) {
         <Option value="shakespeare">Shakespeare</Option>
         <Option value="simpson">Homer Simpson</Option>
         <Option value="poe">Edgar Allan Poe</Option>
+        <Option value="doyle">Arthur Conan Doyle</Option>
       </Select>
       <br />
       <br />
@@ -372,6 +373,25 @@ function Step3(props) {
                 <Select defaultValue="" id="seed" name="seed" size="large" style={{ width: "100%" }} placeholder="Select Seed" required onChange={props.handleChange("seed")}>
                   <Option disabled hidden value="" >-- Select a Seed --</Option>
                   <Option value="simpson">Simpson</Option>
+                </Select>
+          <br />
+          <br />
+        </div>
+      </React.Fragment>
+    );
+  } else if (props.author === 'doyle'){
+    return (
+      <React.Fragment>
+        <div className="form-group">
+          <h3>Starting Text</h3>
+                <Select defaultValue="" id="seed" name="seed" size="large" style={{ width: "100%" }} placeholder="Select Seed" required onChange={props.handleChange("seed")}>
+                  <Option disabled hidden value="">-- Select a Seed --</Option>
+                  <Option value="elementary my dear watson">Elementary, my dear Watson.</Option>
+                  <Option value="when I have eliminated all which is impossible">When I have eliminated all which is impossible.</Option>
+                  <Option value="there is nothing more deceptive than an obvious fact">There is nothing more deceptive than an obvious fact.</Option>
+                  <Option value="you see but you do not observe">You see but you do not observe.</Option>
+                  <Option value="take a community of dutchman of the type of those who defend themselves">Take a community of dutchman of the type of those who defend themselves.</Option>
+                  <Option value="my name is sherlock holmes">My name is Sherlock Holmes.</Option>
                 </Select>
           <br />
           <br />
