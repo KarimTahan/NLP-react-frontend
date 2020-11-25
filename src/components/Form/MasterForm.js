@@ -1,12 +1,23 @@
 import React from 'react';
 import Widget from '../Widget/WidgetLoader';
 import axios from 'axios';
-import { Button, Input, InputNumber, Form, Select, Steps } from 'antd';
+import { Button, Input, InputNumber, Form, Select, Steps, Popover } from 'antd';
 
 
 const { Option } = Select;
 const { TextArea } = Input;
 const { Step } = Steps;
+const customDot = (dot, { status, index }) => (
+  <Popover
+    content={
+      <span>
+        step {index} status: {status}
+      </span>
+    }
+  >
+    {dot}
+  </Popover>
+);
 
 /**
  * Master form class, component implementing a Form with multiples steps before user completes.
@@ -42,7 +53,7 @@ export default class MasterForm extends React.Component {
   renderSteps(){
     return (
       <div>
-      <Steps size="small" current = {this.state.currentStep-1}>
+      <Steps current = {this.state.currentStep-1} progressDot={customDot}>
           <Step title="Author"/>
           <Step title="Word Length"/>
           <Step title="Seed Text"/>
