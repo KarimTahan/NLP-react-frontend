@@ -1,8 +1,7 @@
 import React from 'react';
 import Widget from '../Widget/WidgetLoader';
 import axios from 'axios';
-import { Button, InputNumber, Form, Select, Steps } from 'antd';
-
+import { Button, InputNumber, Form, Select, Steps, Card } from 'antd';
 
 const { Option } = Select;
 const { Step } = Steps;
@@ -275,9 +274,11 @@ export default class MasterForm extends React.Component {
     return (
       <React.Fragment>
         {this.renderSteps()}
+        <Card>
         {this.state.showText && this.renderText()} {/**Generated Text*/}
         {this.state.showForm && this.renderForm()} {/**Form */}
         {this.state.isLoading && this.renderWidget()}{/**Loading Widget */}
+        </Card>
       </React.Fragment>
     );
   }
@@ -296,7 +297,7 @@ function Step1(props) {
     <div className="form-group">
       <h3>Author</h3>
       <Select defaultValue="" id="author" name="author" size="large" style={{ width: "100%" }} placeholder="Select Author..." required onChange={props.handleChange("author")}>
-        <Option disabled hidden value="" >-- Select Author --</Option>
+        <Option disabled hidden value=""> -- Select Author -- </Option>
         <Option value="shakespeare">Shakespeare</Option>
         <Option value="simpson">Homer Simpson</Option>
         <Option value="poe">Edgar Allan Poe</Option>
