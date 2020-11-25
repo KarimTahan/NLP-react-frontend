@@ -1,5 +1,4 @@
 import React from 'react';
-import '../.././stylesheets/Form.css';
 import Widget from '../Widget/WidgetLoader';
 import axios from 'axios';
 import { Button, Input, InputNumber, Form, Select, Steps } from 'antd';
@@ -49,6 +48,9 @@ export default class MasterForm extends React.Component {
           <Step title="Seed Text"/>
           <Step title="Generate Text"/>
       </Steps>
+      <br/>
+      <br/>
+      <br/>
       </div>
     )
   }
