@@ -299,9 +299,10 @@ function Step1(props) {
       <Select defaultValue="" id="author" name="author" size="large" style={{ width: "100%" }} placeholder="Select Author..." required onChange={props.handleChange("author")}>
         <Option disabled hidden value=""> -- Select Author -- </Option>
         <Option value="shakespeare">Shakespeare</Option>
-        <Option value="simpson">Homer Simpson</Option>
+        <Option value="simpson">The Simpsons</Option>
         <Option value="poe">Edgar Allan Poe</Option>
         <Option value="doyle">Arthur Conan Doyle</Option>
+        <Option value="twain">Mark Twain</Option>
       </Select>
       <br />
       <br />
@@ -344,7 +345,14 @@ function Step3(props) {
           <h3>Starting Text</h3>
                 <Select defaultValue="" id="seed" name="seed" size="large" style={{ width: "100%" }} placeholder="Select Seed" required onChange={props.handleChange("seed")}>
                   <Option disabled hidden value="">-- Select a Seed --</Option>
-                  <Option value="shakespeare">Shakespeare</Option>
+                  <Option disabled hidden value="" >-- Select a Seed --</Option>
+                  <Option value="all that glitter is not gold ">All that glitters is not gold.</Option>
+                  <Option value="hell is empty and all the_devil are here . ">Hell is empty. And all the devils are here.</Option>
+                  <Option value="by the pricking of my thumb something wicke this way come . ">By the pricking of my thumbs, Something wicked this way comes.</Option>
+                  <Option value="the lady doth protest too_much methink . ">The lady doth protest too much, methinks.</Option>
+                  <Option value="what in a name ? a rose by any other name would smell as sweet .">What's in a name? A rose by any other name would smell as sweet;</Option>
+                  <Option value="friend romans countryman lend_me your ear ">Friends, Romans, countrymen, lend me your ears;</Option>
+               
                 </Select>
           <br />
           <br />
@@ -358,7 +366,12 @@ function Step3(props) {
           <h3>Starting Text</h3>
                 <Select defaultValue="" id="seed" name="seed" size="large" style={{ width: "100%" }} placeholder="Select Seed" required onChange={props.handleChange("seed")}>
                   <Option disabled hidden value="" >-- Select a Seed --</Option>
-                  <Option value="Edgar Allen Poe">Edgar Allen Poe</Option>
+                  <Option value="those_who dream by day are cognizant of many things ">Those who dream by day are cognizant of many things.</Option>
+                  <Option value="i have great faith in fool self confidence my friend will call it ">I have great faith in fool self confidence, my friend will call it.</Option>
+                  <Option value="once upon a midnight dreary while i ponder weak and weary ">Once upon a midnight dreary, while I pondered, weak and weary.</Option>
+                  <Option value="sleep those little slice of death how i loathe them ">Sleep: Those little slices of death, how I loathe them.</Option>
+                  <Option value="it_was many and many a year_ago in a kingdom by the sea ">It was many and many a year ago, in a kingdom by the sea.</Option>
+                  <Option value="the true genius shudder at incompleteness ">The true genius shudders at incompleteness.</Option>
                 </Select>
           <br />
           <br />
@@ -372,7 +385,12 @@ function Step3(props) {
           <h3>Starting Text</h3>
                 <Select defaultValue="" id="seed" name="seed" size="large" style={{ width: "100%" }} placeholder="Select Seed" required onChange={props.handleChange("seed")}>
                   <Option disabled hidden value="" >-- Select a Seed --</Option>
-                  <Option value="simpson">Simpson</Option>
+                  <Option value="we_were go_to keep the gray one but the mother eat her ">We were going to keep the gray one but the mother ate her.</Option>
+                  <Option value="you see class my lyme disease turn_out to be psychosomatic ">You see, class, my Lyme disease turned out to be psychosomatic.</Option>
+                  <Option value="alright alright spill milk spill milk spill milk ... ">Alright, alright, spilled milk, spilled milk, spilled milk...</Option>
+                  <Option value="would you like something to eat ? i have get dry apricot ... ">Would you like something to eat? I've got dried apricots.</Option>
+                  <Option value="wait a_minute this unkempt youngster just may_be on to something ">Wait a minute. This unkempt youngster just may be on to something.</Option>
+                  <Option value="earth base this_is commander bart mccool . we are under attack by the zorrinid brain changer ! ">Earth base, this is Commander Bart McCool. We are under attack by the Zorrinid brain changers.</Option>
                 </Select>
           <br />
           <br />
@@ -386,12 +404,31 @@ function Step3(props) {
           <h3>Starting Text</h3>
                 <Select defaultValue="" id="seed" name="seed" size="large" style={{ width: "100%" }} placeholder="Select Seed" required onChange={props.handleChange("seed")}>
                   <Option disabled hidden value="">-- Select a Seed --</Option>
-                  <Option value="elementary my dear watson">Elementary, my dear Watson.</Option>
-                  <Option value="when I have eliminated all which is impossible">When I have eliminated all which is impossible.</Option>
-                  <Option value="there is nothing more deceptive than an obvious fact">There is nothing more deceptive than an obvious fact.</Option>
-                  <Option value="you see but you do not observe">You see but you do not observe.</Option>
-                  <Option value="take a community of dutchman of the type of those who defend themselves">Take a community of dutchman of the type of those who defend themselves.</Option>
-                  <Option value="my name is sherlock holmes">My name is Sherlock Holmes.</Option>
+                  <Option value="elementary my dear watson ">Elementary, my dear Watson.</Option>
+                  <Option value="when I have eliminated all which is impossible ">When I have eliminated all which is impossible.</Option>
+                  <Option value="there is nothing more deceptive than an obvious fact ">There is nothing more deceptive than an obvious fact.</Option>
+                  <Option value="you see but you do not observe ">You see but you do not observe.</Option>
+                  <Option value="take a community of dutchman of the type of those who defend themselves ">Take a community of dutchman of the type of those who defend themselves.</Option>
+                  <Option value="my name is sherlock holmes ">My name is Sherlock Holmes.</Option>
+                </Select>
+          <br />
+          <br />
+        </div>
+      </React.Fragment>
+    );
+  } else if(props.author === 'twain'){
+    return (
+      <React.Fragment>
+        <div className="form-group">
+          <h3>Starting Text</h3>
+                <Select defaultValue="" id="seed" name="seed" size="large" style={{ width: "100%" }} placeholder="Select Seed" required onChange={props.handleChange("seed")}>
+                  <Option disabled hidden value="">-- Select a Seed --</Option>
+                  <Option value="it is a time when one 's spirit is subdued and sad ">It is a time when one's spirit is subdued and sad...</Option>
+                  <Option value="if_you should rear a duck in the heart of the sahara ">If you should rear a duck in the heart of the Sahara...</Option>
+                  <Option value="now and then we have a hope that if we live and were good ">Now and then we had a hope that if we lived and were good...</Option>
+                  <Option value="the mississippi_river town are comely clean well built and pleasing to the eye ">The Mississippi River towns are comely, clean, well built, and pleasing to the eye...</Option>
+                  <Option value="all_right then i will go to hell ">All right, then, I'll go to hell.</Option>
+                  <Option value="if_you tell the truth you do_not need a good memory ">If you tell the truth you do not need a good memory.</Option>
                 </Select>
           <br />
           <br />
