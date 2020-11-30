@@ -4,6 +4,8 @@ import '../../stylesheets/carousel.css'
 import Simpsons from '../../img/simpsons.png'
 import EAP from '../../img/portrait-62996_1280.jpg'
 import Shake from '../../img/william-shakespeare.jpg'
+import MT from '../../img/mark-twain.jpg'
+import ACD from '../../img/acd.png'
 import '../../stylesheets/index.css';
 import {Carousel } from 'antd';
 import { PageHeader, Image } from 'antd';
@@ -56,9 +58,21 @@ class AuthorCarousel extends React.Component{
           </div>
           <div>
           <PageHeader style={styles.PageHeaderStyle}
-                title="Unkown"
+                title="Artur Conan Doyle"
                 subTitle="Model"
             />
+            <div >
+              <Image className="Image" height="600" width="600" src={ACD} alt="William Shakespeare"/>
+            </div>
+          </div>
+          <div >
+            <PageHeader style={styles.PageHeaderStyle}
+                title="Mark Twain"
+                subTitle="Model"
+            />
+            <div >
+              <Image className="Image" height="600" width="600" src={MT} alt="William Shakespeare"/>
+            </div>
           </div>
         </Carousel>
     );
