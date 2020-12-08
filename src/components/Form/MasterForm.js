@@ -299,7 +299,7 @@ function Step1(props) {
       <Select defaultValue="" id="author" name="author" size="large" style={{ width: "100%" }} placeholder="Select Author..." required onChange={props.handleChange("author")}>
         <Option disabled hidden value=""> -- Select Author -- </Option>
         <Option value="shakespeare">Shakespeare</Option>
-        <Option value="simpson">The Simpsons</Option>
+        <Option value="simpsons">The Simpsons</Option>
         <Option value="poe">Edgar Allan Poe</Option>
         <Option value="doyle">Arthur Conan Doyle</Option>
         <Option value="twain">Mark Twain</Option>
@@ -378,7 +378,7 @@ function Step3(props) {
         </div>
       </React.Fragment>
     );
-  } else if (props.author === 'simpson'){
+  } else if (props.author === 'simpsons'){
     return (
       <React.Fragment>
         <div className="form-group">
